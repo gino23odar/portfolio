@@ -22,7 +22,7 @@ export default function NavBar({
 
   return (
     <nav aria-label="Main navigation">
-      <ul className="flex flex-col justify-between rounded-r-lg bg-slate-50 px-2 py-2 md:items-center md:rounded-r-xl bottom-10 h-[90lvh]">
+      <ul className="flex flex-col justify-between rounded-r-lg bg-slate-50 px-2 py-2 md:items-center md:rounded-r-xl">
         <div className="flex flex-col items-center justify-between">
           <button
             aria-expanded={open}
@@ -76,7 +76,7 @@ export default function NavBar({
               </li>
               {index < settings.data.nav_item.length - 1 && (
                 <span
-                  className="hidden text-4xl font-thin leading-[0] text-slate-400 md:inline"
+                  className="hidden text-4xl font-thin leading-[0] text-slate-400 sm:inline"
                   aria-hidden="true"
                 >
                   /
@@ -122,7 +122,7 @@ function DesktopMenu({
   pathname: string;
 }) {
   return (
-    <div className="relative z-2 hidden flex-col items-center gap-1 bg-transparent py-0 md:flex">
+    <div className="relative z-2 hidden flex-col items-center gap-1 bg-transparent py-0 xl:flex">
       {settings.data.nav_item.map(({ link, label }, index) => (
         <React.Fragment key={label}>
           <li>

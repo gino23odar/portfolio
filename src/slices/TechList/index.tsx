@@ -9,14 +9,14 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
 import { MdOutlineUnfoldLessDouble } from "react-icons/md";
 import { MdOutlineKeyboardDoubleArrowLeft, MdOutlineKeyboardDoubleArrowRight  } from "react-icons/md";
-
 
 import Bounds from "@/components/Bounds";
 import Heading from "@/components/Heading";
 import SpecialButton from "@/components/SpecialButton";
+import sphere from "../../../public/sphereClear.png";
 
 import pythonLogo from "../../../public/languages/python.svg";
 import javascriptLogo from "../../../public/languages/javascript.svg";
@@ -39,6 +39,7 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
 
   const component = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline>();
+  const tl2 = useRef<gsap.core.Timeline>();
 
   {console.log(sql)}
 
@@ -70,6 +71,26 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
           ease: "power1.inOut",
         },
       );
+
+      tl2.current = gsap.timeline({});
+
+      tl2.current.fromTo(
+        ".langlogo",
+        {
+          opacity: 0,
+          scale: 1.4,
+          rotation: (index:number) => {
+            return index % 2 === 0 ? -30 : 30;
+          }
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          rotation: 0,
+          duration: 0.8,
+          ease: "power3.inOut",
+        },
+      );
     }, { scope: component});
 
 
@@ -81,20 +102,20 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
       ref={component}
     >
       <Bounds as="div" className="w-auto">
-        <Heading size="xl" className="mb-8" as="h2">
+        <Heading size="xl" className="mb-8 ml-12" as="h2">
           {slice.primary.heading}
         </Heading>
         <div className="flex flex-wrap justify-center space-x-4">  
-          <div className="w-1/3 sm:w-1/5">
+          <div className="langlogo w-1/3 sm:w-1/5">
             <Image src={pythonLogo} alt='python'/>
           </div>
-          <div className="w-1/3 sm:w-1/5">
+          <div className="langlogo w-1/3 sm:w-1/5">
             <Image src={javascriptLogo} alt='javascript'/>
           </div>
-          <div className="w-1/3 sm:w-1/5">
+          <div className="langlogo w-1/3 sm:w-1/5">
             <Image src={typescriptLogo} alt='typescript' />
           </div>
-          <div className="w-1/3 sm:w-1/5">
+          <div className="langlogo w-1/3 sm:w-1/5">
             <Image src={javaLogo} alt='java' />
           </div>
         </div>
@@ -371,13 +392,49 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
           </div>
         </Bounds>
       </div>
-      <div className="other flex justify-around mb-12">
-        <Heading as='h4' size='md'>
-          {slice.primary.deployment}
-        </Heading>
-        <Heading as='h4' size='md'>
-          {slice.primary.currently}
-        </Heading>
+      <div className="other grid columns-1 sm:columns-2 justify-around mb-12">
+        <div className="sm:col-start-1 mb-6">
+          <Heading as='h4' size='md' className="mb-6">
+            {slice.primary.deployment}
+          </Heading>
+          <div className="bg-slate-100 rounded-2xl border-8 border-black shadow-xl hover:shadow-slate-50">
+            {slice.primary.services.map(({name,logo}, index) => (
+              // <div className="banner relative overflow-hidden" key={index}>
+              //   <p>{name}</p>
+              //   <div className="shield absolute z-2">
+              //       <div className="logostatic" style={{ background: `url(${sphere}), ${logo}` }}></div>
+              //   </div>
+              // </div>
+              <div className="grid justify-center items-center gap-2" key={index}>
+                {name == 'Vercel' ? <div className="col-start-1 h-32 xl:h-60 w-32 xl:w-60 pt-20">
+                  <PrismicNextImage field={logo} alt='' className="object-contain drop-shadow-xl"/>
+                </div> 
+                : <><div className="col-start-1 h-32 xl:h-60 w-32 xl:w-60 p-2">
+                  <PrismicNextImage field={logo} alt='' className="object-contain drop-shadow-xl"/>
+                  </div>
+                  <p className="col-start-2 font-bold sm:text-2xl lg:text-5xl text-midnightblue">{name}</p></>}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="sm:col-start-2 mb-6">
+          <Heading as='h4' size='md' className="mb-6">
+            {slice.primary.currently}
+          </Heading>
+          <div className="flex flex-col justify-center bg-slate-100 rounded-2xl border-8 border-black shadow-xl hover:shadow-slate-50">
+            {slice.primary.tech.map(({name,logo,description}, index) => (
+              <div className="grid rows-2 justify-center items-center gap-2 text-midnightblue" key={index}>
+                <div className="col-start-1 h-32 xl:h-60 w-32 xl:w-60 p-2">
+                  <PrismicNextImage field={logo} alt='' className="object-contain drop-shadow-xl"/>
+                </div>
+                <p className="col-start-2 font-bold sm:text-2xl lg:text-5xl">{name}</p>
+                <div className="flex justify-end text-md lg:text-xl xl:text-2xl">
+                  <PrismicRichText field={description} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
