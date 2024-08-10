@@ -69,7 +69,11 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = TechListSlice | AboutMeSlice;
+type PageDocumentDataSlicesSlice =
+  | LearningNextSlice
+  | LearningPageSlice
+  | TechListSlice
+  | AboutMeSlice;
 
 /**
  * Content for Page documents
@@ -424,6 +428,190 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Item in *LearningNext → Default → Primary → Software*
+ */
+export interface LearningNextSliceDefaultPrimarySoftwareItem {
+  /**
+   * Name field in *LearningNext → Default → Primary → Software*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: learning_next.default.primary.software[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Logo field in *LearningNext → Default → Primary → Software*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: learning_next.default.primary.software[].logo
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  logo: prismic.ImageField<never>;
+
+  /**
+   * Related field in *LearningNext → Default → Primary → Software*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: learning_next.default.primary.software[].related
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  related: prismic.KeyTextField;
+
+  /**
+   * Related Logo field in *LearningNext → Default → Primary → Software*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: learning_next.default.primary.software[].related_logo
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  related_logo: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *LearningNext → Default → Primary*
+ */
+export interface LearningNextSliceDefaultPrimary {
+  /**
+   * Heading field in *LearningNext → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: learning_next.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Software field in *LearningNext → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: learning_next.default.primary.software[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  software: prismic.GroupField<
+    Simplify<LearningNextSliceDefaultPrimarySoftwareItem>
+  >;
+}
+
+/**
+ * Default variation for LearningNext Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LearningNextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LearningNextSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *LearningNext*
+ */
+type LearningNextSliceVariation = LearningNextSliceDefault;
+
+/**
+ * LearningNext Shared Slice
+ *
+ * - **API ID**: `learning_next`
+ * - **Description**: LearningNext
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LearningNextSlice = prismic.SharedSlice<
+  "learning_next",
+  LearningNextSliceVariation
+>;
+
+/**
+ * Item in *CurrentlyLearning → Default → Primary → CurrentlyLearning*
+ */
+export interface LearningPageSliceDefaultPrimaryCurrentlylearningItem {
+  /**
+   * Name field in *CurrentlyLearning → Default → Primary → CurrentlyLearning*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: learning_page.default.primary.currentlylearning[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Logo field in *CurrentlyLearning → Default → Primary → CurrentlyLearning*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: learning_page.default.primary.currentlylearning[].logo
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  logo: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *CurrentlyLearning → Default → Primary*
+ */
+export interface LearningPageSliceDefaultPrimary {
+  /**
+   * Heading field in *CurrentlyLearning → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: learning_page.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * CurrentlyLearning field in *CurrentlyLearning → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: learning_page.default.primary.currentlylearning[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  currentlylearning: prismic.GroupField<
+    Simplify<LearningPageSliceDefaultPrimaryCurrentlylearningItem>
+  >;
+}
+
+/**
+ * Default variation for CurrentlyLearning Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LearningPageSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LearningPageSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *CurrentlyLearning*
+ */
+type LearningPageSliceVariation = LearningPageSliceDefault;
+
+/**
+ * CurrentlyLearning Shared Slice
+ *
+ * - **API ID**: `learning_page`
+ * - **Description**: LearningPage
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LearningPageSlice = prismic.SharedSlice<
+  "learning_page",
+  LearningPageSliceVariation
+>;
 
 /**
  * Item in *TechList → Default → Primary → TechStack*
@@ -800,6 +988,16 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      LearningNextSlice,
+      LearningNextSliceDefaultPrimarySoftwareItem,
+      LearningNextSliceDefaultPrimary,
+      LearningNextSliceVariation,
+      LearningNextSliceDefault,
+      LearningPageSlice,
+      LearningPageSliceDefaultPrimaryCurrentlylearningItem,
+      LearningPageSliceDefaultPrimary,
+      LearningPageSliceVariation,
+      LearningPageSliceDefault,
       TechListSlice,
       TechListSliceDefaultPrimaryTechstackItem,
       TechListSliceDefaultPrimarySqlItem,

@@ -15,8 +15,9 @@ midnight blue: #0070E0 */
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
     
-    --clr-midnightblue: #003459;
-    --clr-midnightblue-rgb: 0,52,89;
+    --clr-midnightblue: #01216E;
+    --clr-midnightblue-rgb: 1,33,110;
+    --clr-midnightblue-df: #003459;
     --clr-regblue: #1A7CFA;
     --clr-regblue-rgb: 26,124,250;
     --clr-chilli: #E32227;
@@ -34,8 +35,8 @@ midnight blue: #0070E0 */
       --background-start-rgb: 0, 0, 0;
       --background-end-rgb: 0, 0, 0;
       
-      --clr-midnightblue: #003459;
-      --clr-midnightblue-rgb: 0,52,89;
+      --clr-midnightblue: #01216E;
+      --clr-midnightblue-rgb: 1,33,110;
       --clr-regblue: #1A7CFA;
       --clr-regblue-rgb: 26,124,250;
       --clr-chilli: #E32227;
@@ -203,3 +204,64 @@ midnight blue: #0070E0 */
 }
 
 /* end of hexagon background */
+
+/* currently learning slice */
+.bg-learning{
+  background-image: url("../../public/skybg.png");
+  background-position: top center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-color: var(--clr-midnightblue-df);
+  background-blend-mode: normal;
+}
+
+.bg-ocean{
+  
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--clr-midnightblue-df) 100%), url("../../public/oceanbg.png");
+  background-position: top center;
+  background-size: 100% 60%;
+  background-repeat: no-repeat;
+  background-blend-mode: hard-light;
+}
+
+.circle-container {
+  position: relative;
+  width: 800px;
+  height: 800px;
+  margin: 0 auto;
+  /* Optional: If you want to make it circular */
+}
+
+.circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* border: 2px solid #000;  To visualize the circle */
+}
+
+.item {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background-color: rgba(var(--clr-midnightblue-rgb),0.45);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transform-origin: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+  .circle-container {
+    width: 50px;
+    height: 50px;
+  }
+
+  .item {
+    width: 200px;
+    height: 200px;
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "learning_page",
+  "type": "SharedSlice",
+  "name": "CurrentlyLearning",
+  "description": "LearningPage",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "currentlylearning": {
+          "type": "Group",
+          "config": {
+            "label": "CurrentlyLearning",
+            "repeat": true,
+            "fields": {
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "Name",
+                  "placeholder": ""
+                }
+              },
+              "logo": {
+                "type": "Image",
+                "config": {
+                  "label": "Logo",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

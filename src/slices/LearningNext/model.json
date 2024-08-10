@@ -1,0 +1,65 @@
+{
+  "id": "learning_next",
+  "type": "SharedSlice",
+  "name": "LearningNext",
+  "description": "LearningNext",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "software": {
+          "type": "Group",
+          "config": {
+            "label": "Software",
+            "repeat": true,
+            "fields": {
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "Name",
+                  "placeholder": ""
+                }
+              },
+              "logo": {
+                "type": "Image",
+                "config": {
+                  "label": "Logo",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "related": {
+                "type": "Text",
+                "config": {
+                  "label": "Related",
+                  "placeholder": ""
+                }
+              },
+              "related_logo": {
+                "type": "Image",
+                "config": {
+                  "label": "Related Logo",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

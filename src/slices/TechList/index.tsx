@@ -23,7 +23,7 @@ import javascriptLogo from "../../../public/languages/javascript.svg";
 import typescriptLogo from "../../../public/languages/typescript.svg";
 import javaLogo from "../../../public/languages/java.svg";
 
-gsap.registerPlugin(ScrollTrigger);
+
 
 /**
  * Props for `TechList`.
@@ -35,13 +35,13 @@ export type TechListProps = SliceComponentProps<Content.TechListSlice>;
  */
 const TechList = ({ slice }: TechListProps): JSX.Element => {
 
+  gsap.registerPlugin(ScrollTrigger);
+
   const [sql, setSql] = useState<boolean>(slice.primary.sqlbool)
 
   const component = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline>();
   const tl2 = useRef<gsap.core.Timeline>();
-
-  {console.log(sql)}
 
   useGSAP(() => {
       tl.current = gsap.timeline({

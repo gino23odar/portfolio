@@ -1,0 +1,92 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "entirely",
+				"type": "Text"
+			},
+			"software": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"name",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "lying",
+									"type": "Text"
+								}
+							],
+							[
+								"logo",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1600804931749-2da4ce26c869",
+										"width": 3199,
+										"height": 3199
+									},
+									"url": "https://images.unsplash.com/photo-1600804931749-2da4ce26c869",
+									"width": 3199,
+									"height": 3199,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"related",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "care",
+									"type": "Text"
+								}
+							],
+							[
+								"related_logo",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+										"width": 8640,
+										"height": 8640
+									},
+									"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+									"width": 8640,
+									"height": 8640,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

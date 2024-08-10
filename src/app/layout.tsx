@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" className="text-slate-100 dark:text-slate-900">
       <body className={`${nunitoSans.className} bg-midnightblue dark:bg-regblue flex flex-col justify-center` }>
         <Header />
-        <div className="xl:-mt-36">
+        <div className="-mt-20 lg:-mt-28 xl:-mt-56">
           {children}  
         </div>
         <Footer />
