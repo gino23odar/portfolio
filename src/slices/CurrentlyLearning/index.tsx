@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Content, KeyTextField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import {PrismicNextImage} from "@prismicio/next";
@@ -12,6 +12,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Bounds from "@/components/Bounds";
 import Heading from "@/components/Heading";
 import Circle from "@/components/Circle";
+import mist1 from "../../../public/mistcloud.png";
+import mist2 from "../../../public/mistleft.png";
+import splashzone from "../../../public/splashzone.png";
+import waterslash from "../../../public/waterslash.png";
 
 /**
  * Props for `LearningPage`.
@@ -25,60 +29,147 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
 
   gsap.registerPlugin(ScrollTrigger);
 
+  const [mediaCheck, setMediaCheck] = React.useState<boolean>(true);
+
   const component = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline>();
   const tl2 = useRef<gsap.core.Timeline>();
   const tl3 = useRef<gsap.core.Timeline>();
+  const tl4 = useRef<gsap.core.Timeline>();
+  const tl5 = useRef<gsap.core.Timeline>();
+
+  useEffect(() =>{
+
+    const mediaQueryW = window.matchMedia("(max-width: 550px)");
+    const mediaQueryH = window.matchMedia("(max-height: 500px)");
+
+    if (mediaQueryW.matches || mediaQueryH.matches) {
+      setMediaCheck(false);
+    }
+
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      if (mediaQueryW.matches || mediaQueryH.matches) {
+        setMediaCheck(true);
+      } else {
+        setMediaCheck(false);
+      }
+    }
+    mediaQueryW.addEventListener('change', handleMediaChange);
+    mediaQueryH.addEventListener('change', handleMediaChange);
+
+    return () =>{
+      mediaQueryW.removeEventListener('change', handleMediaChange);
+      mediaQueryH.removeEventListener('change', handleMediaChange);
+    }
+  }, [])
 
   useGSAP(() => {
-    tl.current = gsap.timeline({
-      scrollTrigger: {
-        pin: true,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 4,
-      },
-    });
+      tl.current = gsap.timeline({
+        scrollTrigger: {
+          pin: true,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 4,
+        },
+      });
+  
+      tl2.current = gsap.timeline({
+        scrollTrigger: {
+          pin: true,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 4,
+        },
+      });
 
-    tl2.current = gsap.timeline({
-      scrollTrigger: {
-        pin: true,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 4,
-      },
-    });
+      tl3.current = gsap.timeline({
+        scrollTrigger: {
+          trigger:'body',
+          start: "top top",
+          end: "+=1000",
+          scrub: 0.5,
+        },
+      });
 
-    tl3.current = gsap.timeline({
-      scrollTrigger: {
-        trigger:'body',
-        start: "top top",
-        end: "+=1000",
-        scrub: 0.5,
-      },
-    });
+      tl4.current = gsap.timeline({
+        scrollTrigger: {
+          trigger:'body',
+          start: "top top",
+          end: "+=1000",
+          scrub: 0.5,
+        },
+      });
 
-    tl.current.to(
-      '.circle-container', 
-      {
-        rotate: -720,
-    })
-    
-    tl3.current.to(
-      '.huetext',
-      {
-        y: "100vw",
-        color: "#fff"
-      },
-    )
+      tl5.current = gsap.timeline({
+        scrollTrigger: {
+          trigger:'splash',
+          start: "top top",
+          end: "+=500",
+          scrub: 0.5,
+        },
+      });
 
-    tl2.current.to(
-      '.item', 
-      {
-        rotate: 360,
-    })
+      tl.current.to(
+        '.circle-container', 
+        {
+          rotate: -720,
+      }),
+
+      tl2.current.to(
+        '.item', 
+        {
+          rotate: 360,
+      })
+
+      tl3.current.to(
+        '.huetext',
+        {
+          y: "100vw",
+          color: "#fff"
+        },
+      )
+
+      tl4.current.fromTo(
+        '.cloud',
+        {
+          y:"20vw"
+        },
+        {
+          y:"-60vh",
+          opacity: 0
+        }
+      )
+
+      .fromTo(
+        '.splash',
+        {
+          opacity: 0,
+          y:"20vh"
+        },
+        {
+          opacity: 0.8,
+          y:"5vh",
+          scale: 1.5,
+        }
+      )
+
+      tl5.current.fromTo(
+        '.slash',
+        {
+          opacity: 0,
+          y:"20vh"
+        },
+        {
+          opacity: 1,
+          y:"1vh",
+          x:"15vw",
+          scale: 1.9,
+        }
+      )
     
   }, { scope: component });
+
+  console.log(mediaCheck)
 
   return (
     <Bounds
@@ -93,11 +184,24 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
         </h1>
       </div>
       <div className="relative justify-center">
-          <div className="flex justify-center" >
-            <div className="" >
+          <div className="flex justify-center z-20" >
+            {mediaCheck ? (
               <Circle >
+              {slice.primary.currentlylearning.map(({ name, logo }, index) => (
+                <div className="item flex flex-col p-8" key={index}>
+                  <div className="flex opacity-100">
+                    <PrismicNextImage field={logo} alt=''/>
+                  </div>
+                  <p className="text-xl font-bold text-slate-100 dark:text-slate-800">
+                    {name}
+                  </p>
+                </div>
+              ))}
+            </Circle>
+            ) : (
+              <div className="flex flex-col translate-y-[20vh]">
                 {slice.primary.currentlylearning.map(({ name, logo }, index) => (
-                  <div className="item flex flex-col p-8" key={index}>
+                  <div className="flex flex-col p-8" key={index}>
                     <div className="flex opacity-100">
                       <PrismicNextImage field={logo} alt=''/>
                     </div>
@@ -106,13 +210,18 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
                     </p>
                   </div>
                 ))}
-              </Circle>
-            </div>
+              </div>
+            )}
           </div>
           <div className="min-h-[35lvh]">
             ''
           </div>
       </div>
+      <img src={mist1.src} alt='' className="cloud absolute top-[200px] sm:top-0 left-0 w-full h-full object-contain" />
+      {mediaCheck && (<div className="relative left-[60%] w-3/4 lg:w-1/2 2xl:w-1/4 min-h-[15lvh]">
+        <img src={waterslash.src} alt='' className="slash absolute sm:top-0 left-0 w-full h-full object-contain xl:translate-x-1/2" />
+        <img src={splashzone.src} alt='' className="splash absolute sm:top-0 left-0 w-full h-full object-cover xl:-translate-x-[120%] translate-y-1/2" />
+      </div>)}
     </Bounds>
   );
 };
