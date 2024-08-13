@@ -265,3 +265,12 @@ midnight blue: #0070E0 */
     height: 200px;
   }
 }
+
+/* end of currently learning slice */
+/* learning next slice */
+.slider{
+  justify-content: center;
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+}

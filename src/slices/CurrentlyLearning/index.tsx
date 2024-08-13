@@ -109,6 +109,20 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
         },
       });
 
+      tl5.current.fromTo(
+        '.slash',
+        {
+          opacity: 0,
+          y:"20vh"
+        },
+        {
+          opacity: 1,
+          y:"1vh",
+          x:"15vw",
+          scale: 1.9,
+        }
+      )
+
       tl.current.to(
         '.circle-container', 
         {
@@ -153,19 +167,7 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
         }
       )
 
-      tl5.current.fromTo(
-        '.slash',
-        {
-          opacity: 0,
-          y:"20vh"
-        },
-        {
-          opacity: 1,
-          y:"1vh",
-          x:"15vw",
-          scale: 1.9,
-        }
-      )
+      
     
   }, { scope: component });
 
@@ -175,7 +177,7 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
     <Bounds
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-learning relative min-h-[90lvh] overflow-hidden"
+      className="bg-learning w-full relative min-h-[90lvh] overflow-hidden"
       ref={component}
     >
       <div className="absolute top-10 justify-center items-center mx-8 xl:mx-16">
@@ -217,7 +219,9 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
             ''
           </div>
       </div>
-      <img src={mist1.src} alt='' className="cloud absolute top-[200px] sm:top-0 left-0 w-full h-full object-contain" />
+      { mediaCheck && 
+        <img src={mist1.src} alt='' className="cloud absolute top-[200px] sm:top-0 left-0 w-full h-full object-contain" />
+      }
       {mediaCheck && (<div className="relative left-[60%] w-3/4 lg:w-1/2 2xl:w-1/4 min-h-[15lvh]">
         <img src={waterslash.src} alt='' className="slash absolute sm:top-0 left-0 w-full h-full object-contain xl:translate-x-1/2" />
         <img src={splashzone.src} alt='' className="splash absolute sm:top-0 left-0 w-full h-full object-cover xl:-translate-x-[120%] translate-y-1/2" />
