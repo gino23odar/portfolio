@@ -107,7 +107,7 @@ const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
     >
       <div className="bg-ocean md:min-h-[150lvh]">
         <div className="sticky top-10 justify-center items-center mx-8 xl:mx-16">
-          <h1 className="huetext font-bold text-slate-900 bg-slate-50 bg-opacity-30 rounded-xl text-5xl md:text-7xl lg:text-9xl mb-20 p-2">
+          <h1 className="huetext font-bold text-slate-900 bg-slate-50 bg-opacity-30 rounded-xl text-5xl md:text-7xl lg:text-9xl mb-20 -mt-2 p-2 sm:px-20 md:px-30">
             {slice.primary.heading}
           </h1>
         </div>

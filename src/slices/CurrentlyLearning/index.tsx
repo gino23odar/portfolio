@@ -192,14 +192,14 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
               </div>
             )}
           </div>
-          <div className="min-h-[35lvh]">
+          <div className="min-h-[20lvh]">
             ''
           </div>
       </div>
       { mediaCheck && 
         <img src={mist1.src} alt='' className="cloud absolute top-[200px] sm:top-0 left-0 w-full h-full object-contain" />
       }
-      {mediaCheck && (<div className="relative w-full min-h-[15lvh]">
+      {mediaCheck && (<div className="relative w-full min-h-[25lvh]">
         <img src={splashzone.src} alt='' className="splash absolute sm:top-0 left-0 w-full h-full object-cover translate-y-2/3" />
       </div>)}
     </Bounds>
