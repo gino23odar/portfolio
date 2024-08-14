@@ -18,12 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="text-slate-100 dark:text-slate-900">
-      <body className={`${nunitoSans.className} bg-midnightblue dark:bg-regblue flex flex-col justify-center` }>
+      <body className={`${nunitoSans.className} ` }>
         <Header />
-        <div className="-mt-20 lg:-mt-28 xl:-mt-56">
-          {children}  
+        <div className="bg-midnightblue dark:bg-regblue flex flex-col justify-center">
+          <div className="">
+            {children}  
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </body>
     </html>
   );

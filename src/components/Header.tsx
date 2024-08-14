@@ -9,7 +9,7 @@ export default async function Header(){
     const settings = await client.getSingle('settings');
 
   return (
-    <header className='flex sticky top-10 left-0 z-50 w-[100px]'>
+    <header className='fixed top-10 left-0 z-50 h-auto w-[100px]'>
         <NavBar settings={settings} />
     </header>
   )

@@ -100,29 +100,6 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
         },
       });
 
-      tl5.current = gsap.timeline({
-        scrollTrigger: {
-          trigger:'splash',
-          start: "top top",
-          end: "+=500",
-          scrub: 0.5,
-        },
-      });
-
-      tl5.current.fromTo(
-        '.slash',
-        {
-          opacity: 0,
-          y:"20vh"
-        },
-        {
-          opacity: 1,
-          y:"1vh",
-          x:"15vw",
-          scale: 1.9,
-        }
-      )
-
       tl.current.to(
         '.circle-container', 
         {
@@ -222,9 +199,8 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
       { mediaCheck && 
         <img src={mist1.src} alt='' className="cloud absolute top-[200px] sm:top-0 left-0 w-full h-full object-contain" />
       }
-      {mediaCheck && (<div className="relative left-[60%] w-3/4 lg:w-1/2 2xl:w-1/4 min-h-[15lvh]">
-        <img src={waterslash.src} alt='' className="slash absolute sm:top-0 left-0 w-full h-full object-contain xl:translate-x-1/2" />
-        <img src={splashzone.src} alt='' className="splash absolute sm:top-0 left-0 w-full h-full object-cover xl:-translate-x-[120%] translate-y-1/2" />
+      {mediaCheck && (<div className="relative w-full min-h-[15lvh]">
+        <img src={splashzone.src} alt='' className="splash absolute sm:top-0 left-0 w-full h-full object-cover translate-y-2/3" />
       </div>)}
     </Bounds>
   );

@@ -10,9 +10,12 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { Canvas } from "@react-three/fiber";
+
 import Bounds from "@/components/Bounds";
 import ImageSlider from "@/components/ImageSlider";
 import droplets from "../../../public/droplets1.png";
+import ScubaAnimation from "@/components/ScubaAnimation";
 
 /**
  * Props for `LearningNext`.
@@ -23,10 +26,13 @@ export type LearningNextProps = SliceComponentProps<Content.LearningNextSlice>;
  * Component for "LearningNext" Slices.
  */
 const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
+  const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
+  const [isMouseOutside, setIsMouseOutside] = React.useState<boolean>(false);
+  const [mediaCheck, setMediaCheck] = React.useState<boolean>(true);
+  const component = useRef<HTMLDivElement>(null);
+  const tlx = useRef<gsap.core.Timeline>();
 
   gsap.registerPlugin(ScrollTrigger);
-
-  const [mediaCheck, setMediaCheck] = React.useState<boolean>(true);
 
   useEffect(() =>{
 
@@ -37,24 +43,19 @@ const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
       setMediaCheck(false);
     }
 
-    const handleMediaChange = (e: MediaQueryListEvent) => {
-      if (mediaQueryW.matches || mediaQueryH.matches) {
-        setMediaCheck(true);
-      } else {
-        setMediaCheck(false);
-      }
-    }
+    const handleMediaChange = () => {
+      setMediaCheck(!mediaQueryW.matches && !mediaQueryH.matches);
+    };
+
     mediaQueryW.addEventListener('change', handleMediaChange);
     mediaQueryH.addEventListener('change', handleMediaChange);
+    handleMediaChange();
 
     return () =>{
       mediaQueryW.removeEventListener('change', handleMediaChange);
       mediaQueryH.removeEventListener('change', handleMediaChange);
     }
   }, [])
-
-  const component = useRef<HTMLDivElement>(null);
-  const tlx = useRef<gsap.core.Timeline>();
 
   useGSAP(() => {
     tlx.current = gsap.timeline({
@@ -70,15 +71,39 @@ const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
       opacity: 0.3,
       y: "-30vh",
     });
-
-
   }, { scope: component});
+
+  const handleMouseEnter = () => {
+    setIsMouseOutside(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsMouseOutside(true);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      if (isMouseOutside) {
+        setMousePosition({
+          x: event.clientX,
+          y: event.clientY,
+        });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [isMouseOutside]);
+
 
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       ref={component}
+      className="relative"
     >
       <div className="bg-ocean md:min-h-[150lvh]">
         <div className="sticky top-10 justify-center items-center mx-8 xl:mx-16">
@@ -92,13 +117,17 @@ const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
           <img src={droplets.src} className=" bottom-0 left-0 object-center" alt="" />
           <img src={droplets.src} className=" bottom-0 left-0 object-center" alt="" />
         </div>}
-        
+        {/* <div className="min-h-[20lvh]">
+          <Canvas camera={{position: [3,0,0.01]}}>
+            <ScubaAnimation />
+          </Canvas>
+        </div> */}
         <div className="slider">
           <ImageSlider >
             {slice.primary.software.map(({name, logo, related, related_logo}, index) => (
               <div key={index}>
                 <div className="relative flex flex-col rounded-2xl overflow-hidden">
-                  <PrismicNextImage field={logo} className="w-full object-cover rounded-2xl"/>
+                  <PrismicNextImage field={logo} className="w-full object-cover rounded-2xl" alt=""/>
                   <div className="absolute flex justify-center w-1/5 h-1/4 rounded-xl right-0 top-[70%] overflow-hidden mr-2">
                       <PrismicNextImage field={related_logo} alt='' className="object-cover"/>
                   </div>
@@ -109,6 +138,22 @@ const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
           </ImageSlider >
         </div>
       </div>
+      <Canvas
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          position: 'absolute',
+          top: isMouseOutside ? `${mousePosition.y - 100}px` : '50%',
+          left: isMouseOutside ? `${mousePosition.x - 100}px` : '50%',
+          width: '200px', // Set canvas size
+          height: '200px',
+          transform: isMouseOutside ? 'translate(0, 0)' : 'translate(-50%, -50%)',
+          transition: 'top 0.5s ease, left 0.5s ease, transform 0.5s ease', // Smooth transition
+          pointerEvents: 'none', // Allow interaction with elements below the canvas
+        }}
+      >
+        <ScubaAnimation />
+      </Canvas>
     </section>
   );
 };
