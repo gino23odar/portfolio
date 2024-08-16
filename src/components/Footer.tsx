@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='min-h-[10lvh]'>
+    <div className='min-h-[10lvh] mt-auto'>
         Footer
     </div>
   )

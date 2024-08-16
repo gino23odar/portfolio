@@ -148,8 +148,6 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
     
   }, { scope: component });
 
-  console.log(mediaCheck)
-
   return (
     <Bounds
       data-slice-type={slice.slice_type}

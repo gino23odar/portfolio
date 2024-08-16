@@ -9,4 +9,5 @@ export const components = {
   learning_next: dynamic(() => import("./LearningNext")),
   learning_page: dynamic(() => import("./CurrentlyLearning")),
   tech_list: dynamic(() => import("./TechList")),
+  text_block: dynamic(() => import("./TextBlock")),
 };
