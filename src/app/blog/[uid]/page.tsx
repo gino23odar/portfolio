@@ -6,6 +6,7 @@ import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import Bounds from "@/components/Bounds";
 import Heading from "@/components/Heading";
+import BlogBody from "@/components/BlogBody";
 
 type Params = { uid: string };
 
@@ -15,14 +16,7 @@ export default async function Page({ params }: { params: Params }) {
     .getByUID("blog_post", params.uid)
     .catch(() => notFound());
 
-  return (
-    <Bounds as='article'>
-        <div>
-            <Heading as="h1" >{page.data.title}</Heading>
-        </div>
-        <SliceZone slices={page.data.slices} components={components} />
-    </Bounds>
-    );
+  return <BlogBody page={page} />
 }
 
 export async function generateMetadata({

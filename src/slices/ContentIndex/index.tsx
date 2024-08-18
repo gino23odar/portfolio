@@ -5,6 +5,7 @@ import { createClient } from "@/prismicio";
 import Bounds from "@/components/Bounds";
 import Heading from "@/components/Heading";
 import ContentList from "./ContentList";
+import ProjectList from "./ProjectList";
 
 /**
  * Props for `ContentIndex`.
@@ -19,6 +20,7 @@ const ContentIndex = async ({ slice }: ContentIndexProps): Promise<JSX.Element> 
   const client = createClient()
   const blogs = await client.getAllByType("blog_post")
   const projects = await client.getAllByType("projects")
+  const featured = await client.getAllByType("featured_projects")
 
   const contentType = slice.primary.content_type || "Blog";
 
@@ -38,7 +40,8 @@ const ContentIndex = async ({ slice }: ContentIndexProps): Promise<JSX.Element> 
           <PrismicRichText field={slice.primary.description} />
         </div>
       )}
-      <ContentList items={items} contentType={contentType} checkOutText={slice.primary.check_out} fallbackImage={slice.primary.item_image} />
+      {(items == blogs) && <ContentList items={items} contentType={contentType} checkOutText={slice.primary.check_out} fallbackImage={slice.primary.item_image} />}
+      {(items == projects) && <ProjectList items={items} featured={featured} contentType={contentType} checkOutText={slice.primary.check_out} fallbackImage={slice.primary.item_image} />}
     </Bounds>
   );
 };
