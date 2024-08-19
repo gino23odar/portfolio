@@ -1,0 +1,7 @@
+# Block all crawlers for cms
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /preview/
+Disallow: /cms-dashboard/

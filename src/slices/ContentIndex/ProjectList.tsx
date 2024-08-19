@@ -102,8 +102,8 @@ const ProjectList = ({items, featured, checkOutText = "Explore Article", fallbac
             </div>
             <div className='images flex flex-wrap w-full justify-between ' ref={el =>{ imageRef.current[0] = el }}>
                     {items.map((item,i) => (
-                        <div className="image_items block w-[50%] bg-lightchilli mb-px odd:border-r-2 odd:border-r-coolgray odd:-translate-x-[101%] even:translate-x-full odd:rounded-l-xl" key={i}>
-                            <a href={`/blog/${item.uid}`}>
+                        <div className="image_items block w-[50%] bg-lightchilli mb-px odd:border-r-2 odd:border-r-coolgray odd:-translate-x-[101%] even:translate-x-full odd:rounded-l-xl even:rounded-r-xl overflow-hidden" key={i}>
+                            <a href={`/projects/${item.uid}`}>
                                 <img src={contentImages[i]!} className='block w-full'/>
                             </a>
                             <div className='p-4'>
