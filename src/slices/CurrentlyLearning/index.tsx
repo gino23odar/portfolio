@@ -84,7 +84,6 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
 
       tl3.current = gsap.timeline({
         scrollTrigger: {
-          trigger:'body',
           start: "top top",
           end: "+=1000",
           scrub: 0.5,
@@ -93,7 +92,6 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
 
       tl4.current = gsap.timeline({
         scrollTrigger: {
-          trigger:'body',
           start: "top top",
           end: "+=1000",
           scrub: 0.5,

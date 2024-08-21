@@ -4,7 +4,7 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type BlogPostDocumentDataSlicesSlice = TextBlockSlice;
+type BlogPostDocumentDataSlicesSlice = ImageBlockSlice | TextBlockSlice;
 
 /**
  * Content for Blog Post documents
@@ -102,7 +102,7 @@ export type BlogPostDocument<Lang extends string = string> =
     Lang
   >;
 
-type FeaturedProjectsDocumentDataSlicesSlice = TextBlockSlice;
+type FeaturedProjectsDocumentDataSlicesSlice = ImageBlockSlice | TextBlockSlice;
 
 /**
  * Content for Featured Projects documents
@@ -266,6 +266,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | EducationandExperienceSlice
   | ContentIndexSlice
   | LearningNextSlice
   | LearningPageSlice
@@ -331,7 +332,7 @@ interface PageDocumentData {
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
-type ProjectsDocumentDataSlicesSlice = TextBlockSlice;
+type ProjectsDocumentDataSlicesSlice = ImageBlockSlice | TextBlockSlice;
 
 /**
  * Content for Projects documents
@@ -751,6 +752,108 @@ export type ContentIndexSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *EducationandExperience → Default → Primary → Entry*
+ */
+export interface EducationandExperienceSliceDefaultPrimaryEntryItem {
+  /**
+   * Title field in *EducationandExperience → Default → Primary → Entry*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: educationand_experience.default.primary.entry[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Time Period field in *EducationandExperience → Default → Primary → Entry*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: educationand_experience.default.primary.entry[].time_period
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  time_period: prismic.KeyTextField;
+
+  /**
+   * Institution field in *EducationandExperience → Default → Primary → Entry*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: educationand_experience.default.primary.entry[].institution
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  institution: prismic.KeyTextField;
+
+  /**
+   * Description field in *EducationandExperience → Default → Primary → Entry*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: educationand_experience.default.primary.entry[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *EducationandExperience → Default → Primary*
+ */
+export interface EducationandExperienceSliceDefaultPrimary {
+  /**
+   * Heading field in *EducationandExperience → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: educationand_experience.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Entry field in *EducationandExperience → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: educationand_experience.default.primary.entry[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  entry: prismic.GroupField<
+    Simplify<EducationandExperienceSliceDefaultPrimaryEntryItem>
+  >;
+}
+
+/**
+ * Default variation for EducationandExperience Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type EducationandExperienceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<EducationandExperienceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *EducationandExperience*
+ */
+type EducationandExperienceSliceVariation = EducationandExperienceSliceDefault;
+
+/**
+ * EducationandExperience Shared Slice
+ *
+ * - **API ID**: `educationand_experience`
+ * - **Description**: EducationandExperience
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type EducationandExperienceSlice = prismic.SharedSlice<
+  "educationand_experience",
+  EducationandExperienceSliceVariation
+>;
+
+/**
  * Primary content in *Hero → Default → Primary*
  */
 export interface HeroSliceDefaultPrimary {
@@ -811,6 +914,51 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Primary content in *ImageBlock → Default → Primary*
+ */
+export interface ImageBlockSliceDefaultPrimary {
+  /**
+   * Image field in *ImageBlock → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_block.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for ImageBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImageBlockSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImageBlockSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ImageBlock*
+ */
+type ImageBlockSliceVariation = ImageBlockSliceDefault;
+
+/**
+ * ImageBlock Shared Slice
+ *
+ * - **API ID**: `image_block`
+ * - **Description**: ImageBlock
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImageBlockSlice = prismic.SharedSlice<
+  "image_block",
+  ImageBlockSliceVariation
+>;
 
 /**
  * Item in *LearningNext → Default → Primary → Software*
@@ -1425,10 +1573,19 @@ declare module "@prismicio/client" {
       ContentIndexSliceDefaultPrimary,
       ContentIndexSliceVariation,
       ContentIndexSliceDefault,
+      EducationandExperienceSlice,
+      EducationandExperienceSliceDefaultPrimaryEntryItem,
+      EducationandExperienceSliceDefaultPrimary,
+      EducationandExperienceSliceVariation,
+      EducationandExperienceSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      ImageBlockSlice,
+      ImageBlockSliceDefaultPrimary,
+      ImageBlockSliceVariation,
+      ImageBlockSliceDefault,
       LearningNextSlice,
       LearningNextSliceDefaultPrimarySoftwareItem,
       LearningNextSliceDefaultPrimary,

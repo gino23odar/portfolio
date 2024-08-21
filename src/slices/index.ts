@@ -5,7 +5,9 @@ import dynamic from "next/dynamic";
 export const components = {
   about_me: dynamic(() => import("./AboutMe")),
   content_index: dynamic(() => import("./ContentIndex")),
+  educationand_experience: dynamic(() => import("./EducationandExperience")),
   hero: dynamic(() => import("./Hero")),
+  image_block: dynamic(() => import("./ImageBlock")),
   learning_next: dynamic(() => import("./LearningNext")),
   learning_page: dynamic(() => import("./CurrentlyLearning")),
   tech_list: dynamic(() => import("./TechList")),

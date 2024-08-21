@@ -140,7 +140,7 @@ const ContentList = ({items, checkOutText = "Explore Article", fallbackImage, co
                     </div>
                 ))}
             </div>
-            <div className='slider flex w-full' ref={el =>{ sliderRef.current[0] = el }}>
+            <div className='slider2 flex w-full' ref={el =>{ sliderRef.current[0] = el }}>
                 {/* Middle loop: Run through middle elements if length is over 8 */}
                 <div className='slider_items flex items-center ' style={{width: `${items.length * 50}%`}}>
                     {items.length > 8 && (
