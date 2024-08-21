@@ -1,28 +1,35 @@
+'use client'
 import React, { useEffect, useState } from "react";
 
 const ShufflingHeading = ({ text }: { text: string }) => {
     const [displayText, setDisplayText] = useState("");
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const totalDuration = 2000; // Total duration in milliseconds
 
         useEffect(() => {
             if(!text) return;
             
-            const totalDuration = 2000; // Total duration in milliseconds
-            const letterDuration = totalDuration / text.length; // Duration for each letter
+            //const letterDuration = totalDuration / text.length; // Duration for each letter
+            //let currentIndex = 0;
+            const letterCount = text.length;
+            const letterDuration = totalDuration / letterCount; // Average duration per letter
 
-            let currentIndex = 0;
+            const shuffleLetter = (index:number, prevShuffleEnd:number) => {
+                if (index >= text.length) return;
 
-            const shuffleLetter = () => {
-                if (currentIndex >= text.length) return;
+                const remainingTime = totalDuration - prevShuffleEnd;
+                const shuffleTime = Math.random() * (remainingTime / (letterCount - index));
 
                 const interval = setInterval(() => {
                     setDisplayText((prevText) =>
                         text
                             .split("")
                             .map((char, i) =>
-                                i < currentIndex
-                                ? char
-                                : characters[Math.floor(Math.random() * characters.length)]
+                                i < index
+                                ? prevText[i]
+                                : i === index
+                                ? characters[Math.floor(Math.random() * characters.length)]
+                                : " "
                             )
                             .join("")
                     );
@@ -33,19 +40,19 @@ const ShufflingHeading = ({ text }: { text: string }) => {
                     setDisplayText((prevText) =>
                         prevText
                             .split("")
-                            .map((char, i) => (i < currentIndex ? text[i] : char))
+                            .map((char, i) => (i === index ? text[i] : char))
                             .join("")
                     );
-                    currentIndex++;
-                    shuffleLetter();
-                }, letterDuration);
+                    
+                    shuffleLetter(index+1, prevShuffleEnd + shuffleTime);
+                }, shuffleTime);
             };
 
-            shuffleLetter();
+            shuffleLetter(0,0);
         }, [text]);
 
     return (
-        <h1>{displayText}</h1>
+        <>{displayText}</>
     );
 };
 

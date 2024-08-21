@@ -12,6 +12,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Bounds from "@/components/Bounds";
 import Heading from "@/components/Heading";
 import Circle from "@/components/Circle";
+import ShuffleHeader from "@/components/ShuffleHeader";
 import mist1 from "../../../public/mistcloud.png";
 import mist2 from "../../../public/mistleft.png";
 import splashzone from "../../../public/splashzone.png";
@@ -155,7 +156,7 @@ const LearningPage = ({ slice }: LearningPageProps): JSX.Element => {
     >
       <div className="absolute top-10 justify-center items-center mx-8 xl:mx-16">
         <h1 className="huetext font-bold text-slate-900 bg-slate-50 bg-opacity-30 rounded-xl text-5xl md:text-7xl lg:text-9xl mb-20 p-2">
-          {slice.primary.heading}
+          <ShuffleHeader text={slice.primary.heading!} />
         </h1>
       </div>
       <div className="relative justify-center">

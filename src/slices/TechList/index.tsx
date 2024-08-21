@@ -16,7 +16,7 @@ import { MdOutlineKeyboardDoubleArrowLeft, MdOutlineKeyboardDoubleArrowRight  } 
 import Bounds from "@/components/Bounds";
 import Heading from "@/components/Heading";
 import SpecialButton from "@/components/SpecialButton";
-import sphere from "../../../public/sphereClear.png";
+import ShuffleHeader from "@/components/ShuffleHeader";
 
 import pythonLogo from "../../../public/languages/python.svg";
 import javascriptLogo from "../../../public/languages/javascript.svg";
@@ -103,7 +103,7 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
     >
       <Bounds as="div" className="w-auto">
         <Heading size="xl" className="mb-8 ml-12" as="h2">
-          {slice.primary.heading}
+          <ShuffleHeader text={slice.primary.heading!} />
         </Heading>
         <div className="flex flex-wrap justify-center space-x-4">  
           <div className="langlogo w-1/3 sm:w-1/5">

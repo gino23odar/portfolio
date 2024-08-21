@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
@@ -14,6 +14,7 @@ import { Canvas } from "@react-three/fiber";
 
 import Bounds from "@/components/Bounds";
 import ImageSlider from "@/components/ImageSlider";
+import ShuffleHeader from "@/components/ShuffleHeader";
 import droplets from "../../../public/droplets1.png";
 import ScubaAnimation from "@/components/ScubaAnimation";
 
@@ -31,6 +32,9 @@ const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
   const [mediaCheck, setMediaCheck] = React.useState<boolean>(true);
   const component = useRef<HTMLDivElement>(null);
   const tlx = useRef<gsap.core.Timeline>();
+
+  const [isVisible, setIsVisible] = useState(false);
+  const headerRef = useRef(null);
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -98,6 +102,32 @@ const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
   }, [isMouseOutside]);
 
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target); // Stop observing once visible
+        }
+      },
+      {
+        threshold: 0.1, // Adjust this threshold as needed
+      }
+    );
+
+    if (headerRef.current) {
+      observer.observe(headerRef.current);
+    }
+
+    return () => {
+      if (headerRef.current) {
+        observer.unobserve(headerRef.current);
+      }
+    };
+  }, []);
+
+
+
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -107,8 +137,8 @@ const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
     >
       <div className="bg-ocean md:min-h-[150lvh]">
         <div className="sticky top-10 justify-center items-center mx-8 xl:mx-16">
-          <h1 className="huetext font-bold text-slate-900 bg-slate-50 bg-opacity-30 rounded-xl text-5xl md:text-7xl lg:text-9xl mb-20 -mt-2 p-2 sm:px-20 md:px-30">
-            {slice.primary.heading}
+          <h1 ref={headerRef} className="huetext font-bold text-slate-900 bg-slate-50 bg-opacity-30 rounded-xl text-5xl md:text-7xl lg:text-9xl mb-20 -mt-2 p-2 sm:px-20 md:px-30">
+            {isVisible && <ShuffleHeader text={slice.primary.heading!} />}
           </h1>
         </div>
         {mediaCheck && <div className="flex droplets overflow-hidden">

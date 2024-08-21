@@ -61,10 +61,19 @@
         }
       },
       "linkedin_link": {
-        "type": "Text",
+        "type": "Link",
         "config": {
           "label": "LinkedIn Link",
-          "placeholder": ""
+          "placeholder": "",
+          "select": null
+        }
+      },
+      "leetcode_link": {
+        "type": "Link",
+        "config": {
+          "label": "Leetcode Link",
+          "placeholder": "",
+          "select": null
         }
       }
     },

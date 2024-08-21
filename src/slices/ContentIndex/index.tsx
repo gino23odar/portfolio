@@ -4,6 +4,7 @@ import { createClient } from "@/prismicio";
 
 import Bounds from "@/components/Bounds";
 import Heading from "@/components/Heading";
+import ShuffleHeader from "@/components/ShuffleHeader";
 import ContentList from "./ContentList";
 import ProjectList from "./ProjectList";
 
@@ -33,7 +34,7 @@ const ContentIndex = async ({ slice }: ContentIndexProps): Promise<JSX.Element> 
       className="mb-20"
     >
       <Heading size="lg" className="mx-8 lg:ml-10">
-        {slice.primary.heading}
+        <ShuffleHeader text={slice.primary.heading!} />
       </Heading>
       {isFilled.richText(slice.primary.description) && (
         <div className="prose prose-2xl prose-invert mt-4 lg:mt-6 lg:mx-10">
