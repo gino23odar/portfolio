@@ -1,7 +1,11 @@
 import React from 'react';
 import { createClient } from '@/prismicio';
 import { PrismicNextLink } from "@prismicio/next";
+import { isFilled } from '@prismicio/client';
+
 import Link from "next/link";
+import { SiGithub, SiLeetcode, SiLinkedin } from "react-icons/si";
+
 
 async function Footer(){
   const client = createClient();
@@ -22,7 +26,32 @@ async function Footer(){
               © {new Date().getFullYear()} {settings.data.name}
             </p>
           </div>
-          <p>things2</p>
+          <div className="inline-flex justify-center items-center gap-4">
+            {isFilled.link(settings.data.github_link) && (
+              <PrismicNextLink
+                field={settings.data.github_link}
+                className="text-xl xl:text-2xl text-slate-300 transition-all duration-200 hover:text-chilli hover:scale-150"
+              >
+                <SiGithub />
+              </PrismicNextLink>
+            )}
+            {isFilled.link(settings.data.linkedin_link) && (
+              <PrismicNextLink
+                field={settings.data.linkedin_link}
+                className="text-xl xl:text-2xl text-slate-300 transition-all duration-200 hover:text-chilli hover:scale-150"
+              >
+                <SiLinkedin />
+              </PrismicNextLink>
+            )}
+            {isFilled.link(settings.data.leetcode_link) && (
+              <PrismicNextLink
+                field={settings.data.leetcode_link}
+                className="text-xl xl:text-2xl text-slate-300 transition-all duration-200 hover:text-chilli hover:scale-150"
+              >
+                <SiLeetcode />
+              </PrismicNextLink>
+            )}
+          </div>
         </div>
     </div>
   )
