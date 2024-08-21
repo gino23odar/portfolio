@@ -6,7 +6,7 @@ import { Content, KeyTextField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 
 import Bounds from "@/components/Bounds";
-// import Shapes from "./Shapes";
+import ShuffleHeader from "@/components/ShuffleHeader";
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -33,12 +33,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         from: "random"
       }
     });
-    gsap.fromTo(".tag-line", {
-      x:-150, opacity:0, scale: 1.5
-    },
-    {
-      opacity: 1, x:0, duration:1, scale:1, ease: "elastic.out(1,0,3)", delay: 1
-    })
+    
   }, {scope: component});
 
   const renderLetters = (name: KeyTextField, key: string) => {
@@ -66,7 +61,10 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
               {renderLetters(slice.primary.last_name, "first")}
             </span>
           </h1>
-          <span className="tag-line block bg-gradient-to-tr from-indigo-400 dark:from-coolgray via-chilli dark:via-purple-200 to-red-300 dark:to-slate-600 bg-clip-text text-2xl gont-bold uppercase tracking-[.2em] text-transparent opacity-0 md:text-4xl xl:px-6 xl:font-bold">{slice.primary.tag_line}</span>
+          <span className="block bg-gradient-to-tr from-indigo-400 dark:from-coolgray via-chilli dark:via-purple-200 to-red-300 dark:to-slate-600 bg-clip-text text-2xl gont-bold uppercase tracking-[.2em] text-transparent  md:text-4xl xl:px-6 xl:font-bold">
+            <ShuffleHeader text={slice.primary.tag_line!} />
+          </span>
+          
         </div>
       </div>
     </Bounds>
