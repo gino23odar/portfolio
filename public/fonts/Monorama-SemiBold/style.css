@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Monorama';
+    src: local('Monorama Semi Bold'), local('Monorama-Semi-Bold'),
+        url('Monorama-SemiBold.woff2') format('woff2'),
+        url('Monorama-SemiBold.woff') format('woff'),
+        url('Monorama-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }

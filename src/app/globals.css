@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("../../public/fonts/Monorama-SemiBold/style.css");
+
 /* colors to use in this
 
 cool gray: #686361
@@ -67,6 +69,10 @@ midnight blue: #0070E0 */
       linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
   background-size: 55px 55px;
 } */
+
+body{
+  font-family: 'Monorama', sans-serif;
+}
 
 /* specialButton */
 .toggle-switch {
