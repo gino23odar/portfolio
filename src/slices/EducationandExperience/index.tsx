@@ -1,6 +1,10 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 
+import Bounds from "@/components/Bounds";
+import Heading from "@/components/Heading";
+import ShuffleHeader from "@/components/ShuffleHeader";
+
 /**
  * Props for `EducationandExperience`.
  */
@@ -14,13 +18,15 @@ const EducationandExperience = ({
   slice,
 }: EducationandExperienceProps): JSX.Element => {
   return (
-    <section
+    <Bounds
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="mx-10"
     >
-      Placeholder component for educationand_experience (variation:{" "}
-      {slice.variation}) Slices
-    </section>
+      <Heading as="h1" size="lg">
+        <ShuffleHeader text={slice.primary.heading!} />
+      </Heading>
+    </Bounds>
   );
 };
 
