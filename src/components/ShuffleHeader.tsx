@@ -18,7 +18,7 @@ const ShufflingHeading = ({ text }: { text: string }) => {
                 if (index >= text.length) return;
 
                 const remainingTime = totalDuration - prevShuffleEnd;
-                const shuffleTime = Math.random() * (remainingTime / (letterCount - index));
+                const shuffleTime = Math.random() * Math.min(remainingTime / (letterCount - index), letterDuration);
 
                 const interval = setInterval(() => {
                     setDisplayText((prevText) =>
