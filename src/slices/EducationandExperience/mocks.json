@@ -51,6 +51,20 @@
 										}
 									]
 								}
+							],
+							[
+								"iswork",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
+								}
+							],
+							[
+								"isold",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
+								}
 							]
 						]
 					}

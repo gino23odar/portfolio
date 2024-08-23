@@ -72,9 +72,7 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
         },
       );
 
-      tl2.current = gsap.timeline({});
-
-      tl2.current.fromTo(
+      gsap.fromTo(
         ".langlogo",
         {
           opacity: 0,
