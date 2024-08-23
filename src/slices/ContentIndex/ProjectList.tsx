@@ -63,7 +63,7 @@ const ProjectList = ({items, featured, checkOutText = "Explore Article", fallbac
               pin: true,
               scrub: true,
               start: "top top",
-              end: '+=100%',
+              end: '+=200%',
             },
           });
     
