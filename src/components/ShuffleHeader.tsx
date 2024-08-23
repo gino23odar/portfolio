@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 const ShufflingHeading = ({ text }: { text: string }) => {
     const [displayText, setDisplayText] = useState("");
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const totalDuration = 2000; // Total duration in milliseconds
+    const totalDuration = 1000; // Total duration in milliseconds
 
         useEffect(() => {
             if(!text) return;
@@ -18,7 +18,11 @@ const ShufflingHeading = ({ text }: { text: string }) => {
                 if (index >= text.length) return;
 
                 const remainingTime = totalDuration - prevShuffleEnd;
-                const shuffleTime = Math.random() * Math.min(remainingTime / (letterCount - index), letterDuration);
+                const minShuffleTime = 100;
+                const shuffleTime = Math.max(
+                    minShuffleTime,
+                    Math.random() * Math.min(remainingTime / (letterCount - index), letterDuration)
+                );
 
                 const interval = setInterval(() => {
                     setDisplayText((prevText) =>

@@ -805,6 +805,28 @@ export interface EducationandExperienceSliceDefaultPrimaryEntryItem {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description: prismic.RichTextField;
+
+  /**
+   * isWork field in *EducationandExperience → Default → Primary → Entry*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: educationand_experience.default.primary.entry[].iswork
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  iswork: prismic.BooleanField;
+
+  /**
+   * isOld field in *EducationandExperience → Default → Primary → Entry*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: educationand_experience.default.primary.entry[].isold
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  isold: prismic.BooleanField;
 }
 
 /**
