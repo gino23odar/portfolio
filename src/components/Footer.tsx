@@ -5,6 +5,7 @@ import { isFilled } from '@prismicio/client';
 
 import Link from "next/link";
 import { SiGithub, SiLeetcode, SiLinkedin } from "react-icons/si";
+import { CgCode , CgCodeSlash } from "react-icons/cg";
 
 
 async function Footer(){
@@ -15,13 +16,14 @@ async function Footer(){
     <div className='min-h-[5vh] bg-slate-950 bg-opacity-25 mt-auto'>
         <div className='flex flex-wrap justify-between p-4'>
           <div className="flex items-center gap-2">
+            <CgCode className='text-2xl'/>
             <Link
               href="/"
               className="text-2xl font-extrabold tracking-tighter text-slate-100 transition-colors duration-150 hover:text-chilli"
             >
               {settings.data.name}
             </Link>
-            <p>|</p>
+            <CgCodeSlash className='text-2xl'/>
             <p className=" text-lg text-slate-300 ">
               © {new Date().getFullYear()} {settings.data.name}
             </p>
