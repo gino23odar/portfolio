@@ -37,7 +37,7 @@ const EducationandExperience = ({
       data-slice-variation={slice.variation}
       className="flex justify-center"
     >
-      <Heading as="h1" size="xl" className="flex justify-center items-center text-center min-h-[90lvh] mx-10">
+      <Heading as="h1" size="xl" className="flex justify-center items-center text-center min-h-[100lvh] mx-10">
         <ShuffleHeader text={slice.primary.heading!} />
       </Heading>
       <div>
