@@ -22,6 +22,13 @@ const config: Config = {
         lightchilli: `rgb(var(--clr-lightchilli-rgb))`,
         coolgray: `rgb(var(--clr-coolgray-rgb))`,
       },
+      typography: () => ({
+        DEFAULT: {
+          css: {
+            maxWidth: '95%',
+          },
+        },
+      }),
     },
   },
   plugins: [require("@tailwindcss/typography")],

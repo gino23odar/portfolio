@@ -24,10 +24,10 @@ async function Footer(){
               {settings.data.name}
             </Link>
             <CgCodeSlash className='text-2xl'/>
-            <p className=" text-lg text-slate-300 ">
-              © {new Date().getFullYear()} {settings.data.name}
-            </p>
           </div>
+          <p className=" text-lg text-slate-300 ">
+              © {new Date().getFullYear()} {settings.data.name}
+          </p>
           <div className="inline-flex justify-center items-center gap-4">
             {isFilled.link(settings.data.github_link) && (
               <PrismicNextLink
