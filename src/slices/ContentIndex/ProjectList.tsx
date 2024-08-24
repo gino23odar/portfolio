@@ -88,14 +88,16 @@ const ProjectList = ({items, featured, checkOutText = "Explore Article", fallbac
                 <div className='acc_inner flex gap-4 '>
                     {featured.map((item, i) => (
                         <div className="card group rounded-xl cursor-pointer overflow-hidden" key={i}>
-                            <img src={featuredImages[i]!} alt="" className="image w-full h-full object-cover" />
-                            <img src={featuredImages[i]!} alt="" className="background absolute w-full h-[100vh] left-0 top-0 -z-20 object-cover pointer-events-none brightness-50" />
-                            <div className="layer relative border-solid w-full h-1/2 -mt-[200px] z-40">
-                                <div className='absolute w-[260px] bottom-10 right-4 p-[20px] opacity-0 group-hover:opacity-100'> 
-                                    <h2 className='text-xl font-bold'> {item.data.title} </h2>
-                                    <p className='opacity-80 my-1'> {checkOutText} </p>
+                            <a href={`/featured_projects/${item.uid}`} className="block w-full h-full">
+                                <img src={featuredImages[i]!} alt="" className="image w-full h-full object-cover" />
+                                <img src={featuredImages[i]!} alt="" className="background absolute w-full h-[100vh] left-0 top-0 -z-20 object-cover pointer-events-none brightness-50" />
+                                <div className="layer relative border-solid w-full h-1/2 -mt-[200px] z-40">
+                                    <div className='absolute w-[260px] bottom-10 right-4 p-[20px] opacity-0 group-hover:opacity-100'> 
+                                        <h2 className='text-xl font-bold'> {item.data.title} </h2>
+                                        <p className='opacity-80 my-1'> {checkOutText} </p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     ))}
                 </div>            

@@ -4,6 +4,7 @@ import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import FeaturedBody from "@/components/FeaturedBody";
 
 type Params = { uid: string };
 
@@ -13,7 +14,7 @@ export default async function Page({ params }: { params: Params }) {
     .getByUID("featured_projects", params.uid)
     .catch(() => notFound());
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return <FeaturedBody page={page} />;
 }
 
 export async function generateMetadata({
