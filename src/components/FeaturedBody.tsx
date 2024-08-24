@@ -25,7 +25,7 @@ const FeaturedBody = ({page}: {page: Content.FeaturedProjectsDocument}) =>{
 
     return (
         <Bounds as="article" className="md:px-40">
-            <div className="rounded-2xl border-2 border-slate-800 bg-slate-900 px-4 py-10 md:px-8 md:py-20">
+            <div className="project-wrap rounded-2xl border-2 border-slate-800 bg-black px-4 py-10 md:px-8 md:py-20">
                 <Heading as="h1">
                     <ShuffleHeader text={page.data.title!} />
                 </Heading>
