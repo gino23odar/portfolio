@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { PrismicPreview } from "@prismicio/next";
+import { createClient, repositoryName } from "@/prismicio";
 
 export const metadata: Metadata = {
   title: "Portfolio Gino Odar",
@@ -24,6 +26,7 @@ export default function RootLayout({
         </div>
         <Footer />
       </body>
+      <PrismicPreview repositoryName={repositoryName} />
     </html>
   );
 }
