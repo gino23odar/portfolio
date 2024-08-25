@@ -5,6 +5,7 @@ import Bounds from "@/components/Bounds";
 import Heading from "@/components/Heading";
 import Avatar from "@/components/Avatar";
 import ShuffleHeader from "@/components/ShuffleHeader";
+import PDFDownload from "@/components/PDFDownload";
 
 
 /**
@@ -35,11 +36,12 @@ const AboutMe = ({ slice }: AboutMeProps): JSX.Element => {
         />
       </div>
       
-      <button
+      {/* <button
           //linkField={slice.primary.button_link}
           className="lg:m-10 xl:m-12">
           {slice.primary.button_text}
-      </button>
+      </button> */}
+      <PDFDownload/>
     </Bounds>
   );
 };
