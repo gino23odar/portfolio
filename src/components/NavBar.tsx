@@ -8,9 +8,11 @@ import Link from "next/link";
 import { MdMenu, MdClose } from "react-icons/md";
 import { IoHome } from "react-icons/io5";
 
-// import Button from "./Button";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
+
+import { useRouter } from 'next/navigation';
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export default function NavBar({
   settings,
@@ -19,6 +21,8 @@ export default function NavBar({
 }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  
 
   return (
     <nav aria-label="Main navigation">
@@ -85,15 +89,19 @@ export default function NavBar({
             </React.Fragment>
           ))}
           <li>
-            <button
-            //   linkField={settings.data.cta_link}
-            //   label={settings.data.cta_label}
-              className="ml-3"
-            />
+            
+          <button
+            //linkField={settings.data.cta_link}
+            onClick={() => router.push('/contact')}
+            className="text-black"
+          >
+            {settings.data.cta_label}
+          </button>    
+            
           </li>
           <ThemeToggle />
         </div>
-        <DesktopMenu settings={settings} pathname={pathname} />
+        <DesktopMenu settings={settings} pathname={pathname} router={router} />
       </ul>
     </nav>
   );
@@ -117,10 +125,13 @@ function NameLogo({ name }: { name: KeyTextField }) {
 function DesktopMenu({
   settings,
   pathname,
+  router
 }: {
   settings: Content.SettingsDocument;
   pathname: string;
+  router: AppRouterInstance;
 }) {
+
   return (
     <div className="relative z-2 hidden flex-col items-center gap-1 bg-transparent py-0 xl:flex">
       {settings.data.nav_item.map(({ link, label }, index) => (
@@ -158,10 +169,12 @@ function DesktopMenu({
       ))}
       <li>
         <button
-        //   linkField={settings.data.cta_link}
-        //   label={settings.data.cta_label}
-          className="ml-3"
-        />
+          //linkField={settings.data.cta_link}
+          onClick={() => router.push('/contact')}
+          className="text-black"
+        >
+          {settings.data.cta_label}
+        </button> 
       </li>
     </div>
   );

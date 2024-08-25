@@ -4,8 +4,8 @@ import { PrismicNextLink, PrismicNextImage } from "@prismicio/next";
 import Bounds from "@/components/Bounds";
 import Heading from "@/components/Heading";
 import Avatar from "@/components/Avatar";
-import Button from "@/components/Button";
 import ShuffleHeader from "@/components/ShuffleHeader";
+
 
 /**
  * Props for `AboutMe`.
@@ -34,11 +34,12 @@ const AboutMe = ({ slice }: AboutMeProps): JSX.Element => {
           className="row-start-1 max-w-3xl md:col-start-2 md:row-end-3 xl:row-end-4"
         />
       </div>
-      <Button
-          linkField={slice.primary.button_link}
-          label={slice.primary.button_text}
-          className="lg:m-10 xl:m-12"
-        />
+      
+      <button
+          //linkField={slice.primary.button_link}
+          className="lg:m-10 xl:m-12">
+          {slice.primary.button_text}
+      </button>
     </Bounds>
   );
 };
