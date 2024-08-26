@@ -6,6 +6,7 @@ import Bounds from "@/components/Bounds";
 import Heading from "@/components/Heading";
 import ShuffleHeader from "@/components/ShuffleHeader";
 import Timeline from "@/components/Timeline";
+import MouseDown from "@/components/MouseDown";
 
 import { MdOutlineWorkOutline, MdOutlineSchool } from "react-icons/md";
 
@@ -37,9 +38,17 @@ const EducationandExperience = ({
       data-slice-variation={slice.variation}
       className="flex justify-center"
     >
-      <Heading as="h1" size="xl" className="flex justify-center items-center text-center min-h-[100lvh] mx-10">
-        <ShuffleHeader text={slice.primary.heading!} />
-      </Heading>
+      <div className="flex flex-col items-center justify-center min-h-[100lvh]">  
+        <Heading as="h1" size="xl" className="flex justify-center items-center text-center mx-10 mb-8">
+          <ShuffleHeader text={slice.primary.heading!} />
+        </Heading>
+        <div className="flex justify-center mb-3">
+          <h2 className='text-5xl text-white font-bold'>Scroll down</h2>
+        </div>
+        <div className="flex justify-center">
+          <MouseDown/>
+        </div>
+      </div>
       <div>
         <Timeline items={slice.primary.entry} />
       </div>
