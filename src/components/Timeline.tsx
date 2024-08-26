@@ -56,7 +56,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
 
     return (
         <div className="relative flex flex-col items-center p-8">
-            <div className="sm:absolute  top-0 bottom-0 w-1 bg-blue-900 transform -translate-x-1/2"></div>
+            <div className="sm:absolute  top-0 bottom-0 w-1 bg-blue-900 transform -translate-x-[calc(50%+2px)]"></div>
             {items.map((item, index) => {
                 const isodd = index % 2 === 1;
                 return (
@@ -84,6 +84,9 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
                                 <div className="flex flex-col sm:flex-row items-center justify-between font-bold text-2xl border-b-4 border-cyan-300 mb-2 w-full">
                                     <span>{item.title}</span>
                                     <span className="text-sm font-light">{item.time_period}</span>
+                                </div>
+                                <div className="flex justify-end w-full">
+                                    <span className='text-sm'>{item.institution}</span>
                                 </div>
                                 <PrismicRichText field={item.description} />
                             </div>

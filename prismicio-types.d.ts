@@ -830,6 +830,52 @@ export interface EducationandExperienceSliceDefaultPrimaryEntryItem {
 }
 
 /**
+ * Item in *EducationandExperience → Default → Primary → oldExp*
+ */
+export interface EducationandExperienceSliceDefaultPrimaryOldexpItem {
+  /**
+   * Title field in *EducationandExperience → Default → Primary → oldExp*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: educationand_experience.default.primary.oldexp[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Institution field in *EducationandExperience → Default → Primary → oldExp*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: educationand_experience.default.primary.oldexp[].institution
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  institution: prismic.KeyTextField;
+
+  /**
+   * Description field in *EducationandExperience → Default → Primary → oldExp*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: educationand_experience.default.primary.oldexp[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * isWork field in *EducationandExperience → Default → Primary → oldExp*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: educationand_experience.default.primary.oldexp[].iswork
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  iswork: prismic.BooleanField;
+}
+
+/**
  * Primary content in *EducationandExperience → Default → Primary*
  */
 export interface EducationandExperienceSliceDefaultPrimary {
@@ -853,6 +899,18 @@ export interface EducationandExperienceSliceDefaultPrimary {
    */
   entry: prismic.GroupField<
     Simplify<EducationandExperienceSliceDefaultPrimaryEntryItem>
+  >;
+
+  /**
+   * oldExp field in *EducationandExperience → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: educationand_experience.default.primary.oldexp[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  oldexp: prismic.GroupField<
+    Simplify<EducationandExperienceSliceDefaultPrimaryOldexpItem>
   >;
 }
 
@@ -1608,6 +1666,7 @@ declare module "@prismicio/client" {
       ContentIndexSliceDefault,
       EducationandExperienceSlice,
       EducationandExperienceSliceDefaultPrimaryEntryItem,
+      EducationandExperienceSliceDefaultPrimaryOldexpItem,
       EducationandExperienceSliceDefaultPrimary,
       EducationandExperienceSliceVariation,
       EducationandExperienceSliceDefault,

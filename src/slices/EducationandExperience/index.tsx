@@ -52,6 +52,33 @@ const EducationandExperience = ({
       <div>
         <Timeline items={slice.primary.entry} />
       </div>
+      <div className="flex flex-col justify-center">
+        <div className="flex justify-center w-full my-2">
+          <p>Experience prior to 2017</p>
+        </div>
+        <div className="flex justify-center border-t-2 border-blue-900">
+          { slice.primary.oldexp.map((item) => {
+            return (
+              <div className="bg-blue-900 rounded-lg p-4 w-[80%] max-w-xl mt-4">
+                <div className="flex flex-col items-start">
+                  <div className="flex flex-col sm:flex-row items-center justify-between font-bold text-2xl border-b-4 border-cyan-300 mb-2 w-full">
+                    <span>{item.title}</span>
+                    <div className="flex mb-2">
+                      {item.iswork 
+                                  ? (<MdOutlineWorkOutline className="w-full h-full bg-lightchilli rounded-full p-1" />) 
+                                  : (<MdOutlineSchool className="w-full h-full bg-green-700 rounded-full p-1" />)}
+                    </div>
+                  </div>
+                  <div className="flex justify-end w-full">
+                    <span className='text-sm'>{item.institution}</span>
+                  </div>
+                  <PrismicRichText field={item.description} />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </Bounds>
   );
 };
