@@ -3,6 +3,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Content, isFilled, asImageSrc } from '@prismicio/client';
 
+import MouseDown from '@/components/MouseDown';
+
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { gsap } from 'gsap';
 
@@ -84,7 +86,7 @@ const ProjectList = ({items, featured, checkOutText = "Explore Article", fallbac
 
     return (
         <div className='mt-4 lg:mt-6 lg:mx-10 overflow-hidden'>
-            <div className='acc_container flex w-full h-[20lvh] align-center justify-center mb-60'>
+            <div className='acc_container flex w-full h-[20lvh] align-center justify-center mb-80'>
                 <div className='acc_inner flex gap-4 '>
                     {featured.map((item, i) => (
                         <div className="card group rounded-xl cursor-pointer overflow-hidden" key={i}>
@@ -101,6 +103,12 @@ const ProjectList = ({items, featured, checkOutText = "Explore Article", fallbac
                         </div>
                     ))}
                 </div>            
+            </div>
+            <div className="flex justify-center my-4">
+              <h2 className='text-5xl text-white font-bold'>Scroll down</h2>
+            </div>
+            <div className="flex justify-center">
+              <MouseDown/>
             </div>
             <div className='images flex flex-wrap w-full justify-between ' ref={el =>{ imageRef.current[0] = el }}>
                     {items.map((item,i) => (

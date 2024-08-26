@@ -64,8 +64,7 @@ const AboutMe = ({ slice }: AboutMeProps): JSX.Element => {
         <button
             //linkField={slice.primary.button_link}
             onClick={showModal}
-            id="resume-modal"
-            className="lg:m-10 xl:mx-20">
+            className="resume-modal lg:m-10 xl:mx-20">
             {slice.primary.button_text}
         </button>
         <Avatar

@@ -3,6 +3,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { Content, isFilled, asImageSrc } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
+import MouseDown from '@/components/MouseDown';
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { gsap } from 'gsap';
@@ -119,7 +120,13 @@ const ContentList = ({items, checkOutText = "Explore Article", fallbackImage, co
       }, [contentImages]);
 
     return (
-        <div className={`mt-4 lg:mt-6 lg:mx-10 overflow-hidden ${overflowHidden ? 'overflow-hidden' : ''}`}>
+        <div className={`mt-4 lg:mt-6 lg:mx-10  ${overflowHidden ? 'overflow-hidden' : ''}`}>
+            <div className="flex justify-center mb-3">
+              <h2 className='text-5xl text-white font-bold'>Scroll down</h2>
+            </div>
+            <div className="flex justify-center">
+              <MouseDown/>
+            </div>
             <div className='images flex flex-wrap w-full justify-between ' ref={el =>{ imageRef.current[0] = el }}>
                 {items.slice(0,4).map((item,i) => (
                     <div className="image_items block w-[50%] bg-lightchilli mb-px odd:border-r-2 odd:border-r-coolgray odd:-translate-x-[101%] even:translate-x-full" key={i}>
