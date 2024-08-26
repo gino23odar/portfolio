@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 // testing Framer instead of just using GSAP
 import { motion, useAnimation } from 'framer-motion';
 
 import { KeyTextField, RichTextField } from '@prismicio/types';
 import { PrismicRichText } from '@prismicio/react';
+
+import { MdOutlineWorkOutline, MdOutlineSchool } from "react-icons/md";
 
 interface TimelineItem {
     title: KeyTextField;
@@ -63,7 +64,10 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
                         <div
                             className={`absolute top-[40%] sm:transform lg:-translate-y-1/2 w-10 h-10 bg-white border-4 border-blue-900 rounded-full flex items-center justify-center z-10 lg:left-1/2 ml-[-25px]`}
                         >
-                            <img src="/path/to/icon.png" alt="icon" className="w-6 h-6" />
+                            {item.iswork 
+                                ? (<MdOutlineWorkOutline className="w-full h-full bg-lightchilli rounded-full p-1" />) 
+                                : (<MdOutlineSchool className="w-full h-full bg-green-700 rounded-full p-1" />)}
+                            
                         </div>
                         <motion.div
                             ref={(el) => {

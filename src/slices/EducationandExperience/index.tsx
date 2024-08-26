@@ -42,7 +42,7 @@ const EducationandExperience = ({
         <Heading as="h1" size="xl" className="flex justify-center items-center text-center mx-10 mb-8">
           <ShuffleHeader text={slice.primary.heading!} />
         </Heading>
-        <div className="flex justify-center mb-3">
+        <div className="flex justify-center mb-8">
           <h2 className='text-5xl text-white font-bold'>Scroll down</h2>
         </div>
         <div className="flex justify-center">
