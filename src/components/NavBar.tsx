@@ -5,8 +5,13 @@ import React, { useState } from "react";
 import { Content, KeyTextField, asLink } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
-import { MdMenu, MdClose } from "react-icons/md";
-import { IoHome } from "react-icons/io5";
+import { MdMenu, MdClose, MdLinearScale, MdWorkOutline } from "react-icons/md";
+import { IoHomeOutline } from "react-icons/io5";
+import { FaRegUserCircle } from "react-icons/fa";
+import { GoStack } from "react-icons/go";
+import { LuBookOpen } from "react-icons/lu";
+import { BiBookmarks } from "react-icons/bi";
+import { HiOutlineAcademicCap } from "react-icons/hi2";
 
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
@@ -23,10 +28,11 @@ export default function NavBar({
   const pathname = usePathname();
   const router = useRouter();
   
+  
 
   return (
-    <nav aria-label="Main navigation">
-      <ul className="flex flex-col justify-between rounded-r-lg bg-slate-50 px-2 py-2 md:items-center md:rounded-r-xl">
+    <nav aria-label="Main navigation" className="overflow-hidden">
+      <ul className="flex flex-col justify-between rounded-r-lg bg-slate-50 bg-opacity-85 px-2 py-2 md:items-center md:rounded-r-xl">
         <div className="flex flex-col items-center justify-between">
           <button
             aria-expanded={open}
@@ -114,9 +120,9 @@ function NameLogo({ name }: { name: KeyTextField }) {
       aria-label="Home page"
       className="text-xl font-extrabold tracking-tighter text-slate-900"
     >
-        <div className="relative flex items-center gap-2 group">
-            <IoHome />
-            <p className="absolute -left-12 top-2 pt-1 hidden group-hover:inline">{name}</p>
+        <div className="relative flex items-center justify-center gap-2 group my-8">
+            <IoHomeOutline />
+            <p className="absolute top-8 pt-1 hidden group-hover:inline">home</p>
         </div>
     </Link>
   );
@@ -132,29 +138,46 @@ function DesktopMenu({
   router: AppRouterInstance;
 }) {
 
+  const [active, setActive] = useState<string|null>(null);
+
+  let iconRouter = {
+    'About': <FaRegUserCircle />,
+    'TechStack': <GoStack  />,
+    'Learning': <LuBookOpen  />,
+    'Blog': <BiBookmarks />,
+    'Projects': <MdWorkOutline />,
+    'E&E': <HiOutlineAcademicCap />,
+  }
+
+
   return (
-    <div className="relative z-2 hidden flex-col items-center gap-1 bg-transparent py-0 xl:flex">
+    <div className="relative z-2 hidden flex-col justify-around items-center gap-1 min-h-[75lvh] bg-transparent py-8 xl:flex">
+      
       {settings.data.nav_item.map(({ link, label }, index) => (
         <React.Fragment key={label}>
           <li>
             <PrismicNextLink
               className={clsx(
-                "group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-slate-900",
+                "group relative block overflow-hidden0 rounded px-3 py-1 text-base font-bold text-slate-900",
               )}
               field={link}
               aria-current={
                 pathname.includes(asLink(link) as string) ? "page" : undefined
               }
+              onClick={() => setActive(label)}
             >
               <span
                 className={clsx(
-                  "absolute inset-0 z-0 h-full rounded bg-yellow-300 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                  `absolute inset-0 z-0 h-full rounded-full bg-regblue transition-transform  duration-300 ease-in-out  group-hover:translate-x-0 ${active == label? 'translate-x-16 bg-chilli' : ''}`,
                   pathname.includes(asLink(link) as string)
-                    ? "translate-y-8"
-                    : "translate-y-8",
+                    ? "translate-x-24"
+                    : "translate-x-24",
                 )}
               />
-              <span className="relative">{label}</span>
+              <div className="flex flex-col items-center justify-center p-2 group-hover:p-0">
+                <span className="relative text-2xl">{iconRouter[label as keyof typeof iconRouter]}</span>
+                <span className={`hidden z-10 group-hover:inline ${active == label? 'inline' : ''}`}>{label}</span>
+              </div>
             </PrismicNextLink>
           </li>
           {index < settings.data.nav_item.length - 1 && (
@@ -162,20 +185,19 @@ function DesktopMenu({
               className="hidden text-4xl font-thin leading-[0] text-slate-400 md:inline"
               aria-hidden="true"
             >
-              ---
+              <MdLinearScale />
             </span>
           )}
         </React.Fragment>
       ))}
-      <li>
-        <button
+      <button
           //linkField={settings.data.cta_link}
+          id="resume-modal"
           onClick={() => router.push('/contact')}
-          className="text-black"
+          className="text-black bg-coolgray"
         >
           {settings.data.cta_label}
         </button> 
-      </li>
     </div>
   );
 }
