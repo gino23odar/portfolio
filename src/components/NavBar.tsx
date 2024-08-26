@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Content, KeyTextField, asLink } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
@@ -27,7 +27,17 @@ export default function NavBar({
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  
+
+  const squareCount = 100; // Adjust the number of squares as needed
+  const squares = Array.from({ length: squareCount }, (_, i) => i);
+
+  const [delays, setDelays] = useState<number[]>([]);
+  const [active, setActive] = useState<string|null>(null);
+
+  useEffect(() => {
+    const newDelays = squares.map(() => Math.random() * 0.5);
+    setDelays(newDelays);
+  }, []);
   
 
   return (
@@ -42,78 +52,100 @@ export default function NavBar({
           >
             <MdMenu />
           </button>
-          <NameLogo name={settings.data.name} />
+          <NameLogo name={settings.data.name} setActive={setActive} />
         </div>
         <div
           className={clsx(
-            "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-end gap-4 bg-slate-900 dark:bg-slate-50 pr-4 pt-14 transition-transform duration-300 ease-in-out ",
+            "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-end gap-4 bg-opacity-0 dark:bg-slate-50 pr-4 pt-14 transition-transform duration-0 ease-in-out overflow-hidden",
             open ? "translate-x-0" : "translate-x-[-100%]",
           )}
         >
+          {/* Grid of Squares */}
+          <div
+            className={clsx(
+              "absolute inset-0 grid",
+              open ? "animate-squares" : "hidden"
+            )}
+            style={{
+              gridTemplateColumns: `repeat(${Math.sqrt(squareCount)}, 1fr)`,
+              gridTemplateRows: `repeat(${Math.sqrt(squareCount)}, 1fr)`,
+            }}
+          >
+            {squares.map((square, index) => (
+              <div
+                key={square}
+                className="bg-midnightblue dark:bg-regblue w-full h-full"
+                style={{
+                  animationDelay: `${delays[index]}s`,
+                  animationDuration: "1.5s",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Close Button */}
           <button
             aria-label="Close menu"
             aria-expanded={open}
             className="fixed right-4 top-3 block p-2 text-2xl dark:text-slate-800 text-slate-50"
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false);
+              setActive(null);
+            }}
           >
             <MdClose />
           </button>
-          {settings.data.nav_item.map(({ link, label }, index) => (
-            <React.Fragment key={label}>
-              <li className="first:mt-8">
-                <PrismicNextLink
-                  className={clsx(
-                    "group relative block overflow-hidden rounded px-3 text-3xl font-bold dark:text-slate-900 text-slate-50",
+
+          {/* Menu Items */}
+          <div className="flex flex-col justify-center items-center w-full h-full">
+            <ul className="relative z-10">
+              {settings.data.nav_item.map(({ link, label }, index) => (
+                <React.Fragment key={label}>
+                  <li className="first:mt-8">
+                    <PrismicNextLink
+                      className={clsx(
+                        "group relative block overflow-hidden rounded px-3 text-3xl font-bold dark:text-slate-900 text-slate-50",
+                      )}
+                      field={link}
+                      onClick={() => setOpen(false)}
+                      aria-current={
+                        pathname.includes(asLink(link) as string) ? "page" : undefined
+                      }
+                    >
+                      <span
+                        className={clsx(
+                          "absolute inset-0 z-0 h-full translate-y-12 rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
+                          pathname.includes(asLink(link) as string)
+                            ? "translate-y-6"
+                            : "translate-y-18",
+                        )}
+                      />
+                      <span className="relative">{label}</span>
+                    </PrismicNextLink>
+                  </li>
+                  {index < settings.data.nav_item.length - 1 && (
+                    <span
+                      className="hidden text-4xl font-thin leading-[0] text-slate-400 sm:inline"
+                      aria-hidden="true"
+                    >
+                      ---
+                    </span>
                   )}
-                  field={link}
-                  onClick={() => setOpen(false)}
-                  aria-current={
-                    pathname.includes(asLink(link) as string)
-                      ? "page"
-                      : undefined
-                  }
-                >
-                  <span
-                    className={clsx(
-                      "absolute inset-0 z-0 h-full translate-y-12 rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
-                      pathname.includes(asLink(link) as string)
-                        ? "translate-y-6"
-                        : "translate-y-18",
-                    )}
-                  />
-                  <span className="relative">{label}</span>
-                </PrismicNextLink>
-              </li>
-              {index < settings.data.nav_item.length - 1 && (
-                <span
-                  className="hidden text-4xl font-thin leading-[0] text-slate-400 sm:inline"
-                  aria-hidden="true"
-                >
-                  ---
-                </span>
-              )}
-            </React.Fragment>
-          ))}
-          <li>
-            
-          <button
-            //linkField={settings.data.cta_link}
-            onClick={() => router.push('/contact')}
-            className="text-black"
-          >
-            {settings.data.cta_label}
-          </button>    
-            
-          </li>
-          <ThemeToggle />
+                </React.Fragment>
+              ))}
+            </ul>
+            <div className="flex mt-8">
+              <ThemeToggle />
+            </div>
+          </div>
         </div>
-        <DesktopMenu settings={settings} pathname={pathname} router={router} />
+        <DesktopMenu settings={settings} pathname={pathname} router={router} active={active} setActive={setActive}/>
       </ul>
     </nav>
   );
 }
 
-function NameLogo({ name }: { name: KeyTextField }) {
+function NameLogo({ name, setActive }: { name: KeyTextField, setActive: React.Dispatch<React.SetStateAction<string|null>> }) {
   return (
     <Link
       href="/"
@@ -131,14 +163,17 @@ function NameLogo({ name }: { name: KeyTextField }) {
 function DesktopMenu({
   settings,
   pathname,
-  router
+  router,
+  active,
+  setActive
 }: {
   settings: Content.SettingsDocument;
   pathname: string;
   router: AppRouterInstance;
+  active: string|null;
+  setActive: React.Dispatch<React.SetStateAction<string|null>>;
 }) {
 
-  const [active, setActive] = useState<string|null>(null);
 
   let iconRouter = {
     'About': <FaRegUserCircle />,
@@ -148,7 +183,7 @@ function DesktopMenu({
     'Projects': <MdWorkOutline />,
     'E&E': <HiOutlineAcademicCap />,
   }
-
+  console.log(active)
 
   return (
     <div className="relative z-2 hidden flex-col justify-around items-center gap-1 min-h-[75lvh] bg-transparent py-8 xl:flex">
@@ -168,9 +203,9 @@ function DesktopMenu({
             >
               <span
                 className={clsx(
-                  `absolute inset-0 z-0 h-full rounded-full bg-regblue transition-transform  duration-300 ease-in-out  group-hover:translate-x-0 ${active == label? 'translate-x-16 bg-chilli' : ''}`,
+                  `absolute inset-0 z-0 h-full rounded-full transition-transform  duration-300 ease-in-out  group-hover:translate-x-0 ${active == label? 'translate-x-14 bg-chilli' : 'bg-regblue'}`,
                   pathname.includes(asLink(link) as string)
-                    ? "translate-x-24"
+                    ? "translate-x-16"
                     : "translate-x-24",
                 )}
               />
@@ -192,9 +227,8 @@ function DesktopMenu({
       ))}
       <button
           //linkField={settings.data.cta_link}
-          id="resume-modal"
           onClick={() => router.push('/contact')}
-          className="text-black bg-coolgray"
+          className="resume-modal text-black bg-coolgray"
         >
           {settings.data.cta_label}
         </button> 
