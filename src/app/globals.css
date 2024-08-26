@@ -11,6 +11,7 @@ chilli pepper: #E32227
 blue: #1A7CFA
 midnight blue: #0070E0 */
 
+
 @layer base {
   :root{
     --foreground-rgb: 255, 255, 255;
@@ -187,7 +188,7 @@ dialog{
   scale: 0;
 }
 
-#resume-modal {
+.resume-modal {
   position: relative;
   padding: 10px 22px;
   border-radius: 6px;
@@ -198,12 +199,12 @@ dialog{
   transition: all 0.2s ease;
 }
 
-#resume-modal:active {
+.resume-modal:active {
   transform: scale(0.96);
 }
 
-#resume-modal:before,
-#resume-modal:after {
+.resume-modal:before,
+.resume-modal:after {
   position: absolute;
   content: "";
   width: 150%;
@@ -214,7 +215,7 @@ dialog{
   background-repeat: no-repeat;
 }
 
-#resume-modal:hover:before {
+.resume-modal:hover:before {
   top: -70%;
   background-image: radial-gradient(circle, #D4AF37 20%, transparent 20%),
     radial-gradient(circle, transparent 20%, #D4AF37 20%, transparent 30%),
@@ -249,7 +250,7 @@ dialog{
   }
 }
 
-#resume-modal:hover::after {
+.resume-modal:hover::after {
   bottom: -70%;
   background-image: radial-gradient(circle, #D4AF37 20%, transparent 20%),
     radial-gradient(circle, #D4AF37 20%, transparent 20%),
@@ -426,6 +427,19 @@ dialog{
   will-change: transform;
 }
 
+@keyframes scroll {
+	0% {
+		transform: translateY(0);
+	}
+	30% {
+		transform: translateY(100px);
+	}
+}
+
+#wheel {
+	animation: scroll ease 1.5s infinite;
+}
+
 /* Projectlist component */
 
 .acc_container::before{
@@ -513,3 +527,20 @@ dialog{
   }
 }
 
+/* navBar */
+
+@keyframes square-appear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-squares div {
+  animation-name: square-appear;
+  animation-fill-mode: forwards;
+}
