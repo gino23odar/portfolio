@@ -29,7 +29,7 @@ export default function RootLayout({
         <div className="background-gradient fixed inset-0 -z-50 w-full h-full" />
         <Header />
         {modal}
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center overflow-hidden">
           {children}
         </div>
         <Footer />
