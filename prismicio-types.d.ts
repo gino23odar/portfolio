@@ -453,6 +453,16 @@ export interface SettingsDocumentDataNavItemItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   label: prismic.KeyTextField;
+
+  /**
+   * Label Extra field in *Settings → Nav Item*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.nav_item[].label_extra
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label_extra: prismic.KeyTextField;
 }
 
 /**

@@ -99,7 +99,7 @@ export default function NavBar({
           {/* Menu Items */}
           <div className="flex flex-col justify-center items-center w-full h-full">
             <ul className="relative z-10">
-              {settings.data.nav_item.map(({ link, label }, index) => (
+              {settings.data.nav_item.map(({ link, label, label_extra }, index) => (
                 <React.Fragment key={label}>
                   <li className="first:mt-8">
                     <PrismicNextLink
@@ -114,13 +114,16 @@ export default function NavBar({
                     >
                       <span
                         className={clsx(
-                          "absolute inset-0 z-0 h-full translate-y-12 rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
+                          "absolute inset-0 z-0 h-full translate-y-12 rounded bg-chilli dark:bg-lightchilli transition-transform duration-300 ease-in-out group-hover:translate-y-0",
                           pathname.includes(asLink(link) as string)
                             ? "translate-y-6"
                             : "translate-y-18",
                         )}
                       />
-                      <span className="relative">{label}</span>
+                      <div className="flex">
+                        <span className="relative text-5xl lg:text-7xl">{label}</span>
+                        <span className="relative text-7xl lg:text-9xl hidden group-hover:inline">{label_extra}</span>
+                      </div>
                     </PrismicNextLink>
                   </li>
                   {index < settings.data.nav_item.length - 1 && (
@@ -203,15 +206,15 @@ function DesktopMenu({
             >
               <span
                 className={clsx(
-                  `absolute inset-0 z-0 h-full rounded-full transition-transform  duration-300 ease-in-out  group-hover:translate-x-0 ${active == label? 'translate-x-14 bg-chilli' : 'bg-regblue'}`,
+                  `absolute inset-0 z-0 h-full rounded-full transition-transform  duration-300 ease-in-out bg-midnightblue dark:bg-regblue group-hover:translate-x-0 ${active == label? 'translate-x-14' : ''}`,
                   pathname.includes(asLink(link) as string)
                     ? "translate-x-16"
                     : "translate-x-24",
                 )}
               />
               <div className="flex flex-col items-center justify-center p-2 group-hover:p-0">
-                <span className="relative text-2xl">{iconRouter[label as keyof typeof iconRouter]}</span>
-                <span className={`hidden z-10 group-hover:inline ${active == label? 'inline' : ''}`}>{label}</span>
+                <span className="relative text-2xl group-hover:invert">{iconRouter[label as keyof typeof iconRouter]}</span>
+                <span className={`hidden z-10 group-hover:inline text-black group-hover:text-slate-50 ${active == label? 'inline' : ''}`}>{label}</span>
               </div>
             </PrismicNextLink>
           </li>

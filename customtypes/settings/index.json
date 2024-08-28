@@ -33,6 +33,13 @@
                 "label": "Label",
                 "placeholder": ""
               }
+            },
+            "label_extra": {
+              "type": "Text",
+              "config": {
+                "label": "Label Extra",
+                "placeholder": ""
+              }
             }
           }
         }
