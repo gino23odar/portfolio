@@ -129,7 +129,7 @@ const ContentList = ({items, checkOutText = "Explore Article", fallbackImage, co
             </div>
             <div className='images flex flex-wrap w-full justify-between ' ref={el =>{ imageRef.current[0] = el }}>
                 {items.slice(0,4).map((item,i) => (
-                    <div className="image_items block w-[50%] bg-lightchilli mb-px odd:border-r-2 odd:border-r-coolgray odd:-translate-x-[101%] even:translate-x-full" key={i}>
+                    <div className="image_items block w-[50%] bg-lightchilli mb-px odd:border-r-2 odd:border-r-coolgray odd:-translate-x-[101%] even:translate-x-full rounded-sm" key={i}>
                         <a href={`/blog/${item.uid}`}>
                             <img src={contentImages[i]!} className='block w-full'/>
                         </a>
@@ -153,7 +153,7 @@ const ContentList = ({items, checkOutText = "Explore Article", fallbackImage, co
                     {items.length > 8 && (
                         items.slice(4, items.length - 4).map((item, i) => (
                             <a href={`/blog/${item.uid}`} key={i + 4}>
-                                <div className="block w-[60vw] h-auto bg-lightchilli mb-px odd:border-r-2 odd:border-b-coolgray" >
+                                <div className="block w-[60vw] h-auto bg-lightchilli mb-px odd:border-r-2 odd:border-b-coolgray rounded-sm" >
                                     <img src={contentImages[i + 4]!} className='block w-full'/>
                                     <div className='flex justify-between items-center p-4'>
                                         <span>{item.data.title}</span>
@@ -175,7 +175,7 @@ const ContentList = ({items, checkOutText = "Explore Article", fallbackImage, co
                     {items.length > 4 && (
                     items.slice(-4).map((item, i) => (
                         <div 
-                        className="image_items block w-[50%] bg-lightchilli mb-px odd:border-r-2 odd:border-r-coolgray odd:-translate-x-[101%] even:translate-x-full" 
+                        className="image_items block w-[50%] bg-lightchilli mb-px odd:border-r-2 odd:border-r-coolgray odd:-translate-x-[101%] even:translate-x-full rounded-sm" 
                         key={i + items.length - 4}  // Adjust key to avoid conflicts
                         >
                         <a href={`/blog/${item.uid}`}>

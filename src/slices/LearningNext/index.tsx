@@ -32,6 +32,7 @@ const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
   const [mediaCheck, setMediaCheck] = React.useState<boolean>(true);
   const component = useRef<HTMLDivElement>(null);
   const tlx = useRef<gsap.core.Timeline>();
+  const tlh = useRef<gsap.core.Timeline>();
 
   const [isVisible, setIsVisible] = useState(false);
   const headerRef = useRef(null);
@@ -70,10 +71,22 @@ const LearningNext = ({ slice }: LearningNextProps): JSX.Element => {
         scrub: 3,
       },
     });
+    tlh.current = gsap.timeline({
+      scrollTrigger: {
+        trigger: component.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
 
     tlx.current.to('.droplets', {
       opacity: 0.3,
       y: "-30vh",
+    });
+    tlh.current.to('.huetext', {
+      opacity: 0.6,
+      y: "+80vh",
     });
   }, { scope: component});
 
