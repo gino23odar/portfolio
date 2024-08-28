@@ -7,6 +7,7 @@ import { SliceComponentProps } from "@prismicio/react";
 
 import Bounds from "@/components/Bounds";
 import ShuffleHeader from "@/components/ShuffleHeader";
+import  BonFire  from '@/slices/Hero/BonFire';
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -50,9 +51,10 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       ref={component}
+      className="flex flex-row"
     >
-      <div className="grid min-h-[80vh] grid-cols-1 xl:grid-cols-4 lg:justify-items-center items-center"> 
-        <div className="col-start-1 xl:col-start-2 lg:col-end-4"> 
+      <div className="grid min-h-[80vh] grid-cols-1 grid-rows-2 xl:grid-cols-4 justify-items-end lg:justify-items-center items-center"> 
+        <div className="col-start-1 xl:col-start-2 lg:col-end-4 lg:row-span-2"> 
           <h1 className="mb-8 text-[clamp(2rem,22vmin,20rem)] font-extrabold leading-none tracking-tighter" aria-label={slice.primary.first_name + " " + slice.primary.last_name}>
             <span className="block text-chilli dark:text-lightchilli">
               {renderLetters(slice.primary.first_name, "first")}
@@ -64,7 +66,9 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
           <span className="block bg-gradient-to-tr from-indigo-400 dark:from-coolgray via-chilli dark:via-purple-200 to-red-300 dark:to-slate-600 bg-clip-text text-2xl gont-bold uppercase tracking-[.2em] text-transparent  md:text-4xl xl:px-6 xl:font-bold">
             <ShuffleHeader text={slice.primary.tag_line!} />
           </span>
-          
+        </div>
+        <div className="row-start-2 xl:col-start-4">
+            <BonFire />
         </div>
       </div>
     </Bounds>
