@@ -22,6 +22,7 @@ export const Contact = () => {
         },
         (error) => {
           console.log('FAILED...', error.text);
+          handleFailure();
         },
       );
   };

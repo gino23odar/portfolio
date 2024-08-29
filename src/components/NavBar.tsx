@@ -28,7 +28,7 @@ export default function NavBar({
   const pathname = usePathname();
   const router = useRouter();
 
-  const squareCount = 100; // Adjust the number of squares as needed
+  const squareCount = 100;
   const squares = Array.from({ length: squareCount }, (_, i) => i);
 
   const [delays, setDelays] = useState<number[]>([]);
@@ -56,7 +56,7 @@ export default function NavBar({
         </div>
         <div
           className={clsx(
-            "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-end gap-4 bg-opacity-0 dark:bg-slate-50 pr-4 pt-14 transition-transform duration-0 ease-in-out overflow-hidden",
+            "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-end gap-4 bg-opacity-0  pr-4 pt-14 transition-transform duration-0 ease-in-out overflow-hidden",
             open ? "translate-x-0" : "translate-x-[-100%]",
           )}
         >
