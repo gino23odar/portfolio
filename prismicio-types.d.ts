@@ -142,6 +142,17 @@ interface FeaturedProjectsDocumentData {
   preview: prismic.ImageField<never>;
 
   /**
+   * tmpBG field in *Featured Projects*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_projects.tmpbg
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  tmpbg: prismic.ImageField<never>;
+
+  /**
    * Slice Zone field in *Featured Projects*
    *
    * - **Field Type**: Slice Zone

@@ -186,17 +186,17 @@ function DesktopMenu({
     'Projects': <MdWorkOutline />,
     'E&E': <HiOutlineAcademicCap />,
   }
-  console.log(active)
+  
 
   return (
-    <div className="relative z-2 hidden flex-col justify-around items-center gap-1 min-h-[75lvh] bg-transparent py-8 xl:flex">
+    <div className="relative z-2 hidden flex-col justify-around items-center gap-1 min-h-[50lvh] bg-transparent py-8 xl:flex">
       
       {settings.data.nav_item.map(({ link, label }, index) => (
         <React.Fragment key={label}>
           <li>
             <PrismicNextLink
               className={clsx(
-                "group relative block overflow-hidden0 rounded px-3 py-1 text-base font-bold text-slate-900",
+                "group relative block overflow-hidden0 rounded px-3 py-px text-base font-bold text-slate-900",
               )}
               field={link}
               aria-current={

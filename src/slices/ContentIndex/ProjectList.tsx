@@ -30,8 +30,20 @@ const ProjectList = ({items, featured, checkOutText = "Explore Article", fallbac
             : fallbackImage;
         return asImageSrc(image, {
             fit: 'scale',
-            w: 220,
-            h: 150,
+            w: 400,
+            h: 600,
+            exp: -8
+        });
+    })
+
+    const featuredBgs = featured.map((item) =>{
+        const image = isFilled.image(item.data.tmpbg) 
+            ? item.data.tmpbg 
+            : fallbackImage;
+        return asImageSrc(image, {
+            fit: 'scale',
+            w: 1920,
+            h: 1080,
             exp: -8
         });
     })
@@ -92,7 +104,7 @@ const ProjectList = ({items, featured, checkOutText = "Explore Article", fallbac
                         <div className="card group rounded-xl cursor-pointer overflow-hidden" key={i}>
                             <a href={`/featured_projects/${item.uid}`} className="block w-full h-full">
                                 <img src={featuredImages[i]!} alt="" className="image w-full h-full object-cover" />
-                                <img src={featuredImages[i]!} alt="" className="background absolute w-full h-[100vh] left-0 top-0 -z-20 object-cover pointer-events-none brightness-50" />
+                                <img src={featuredBgs[i]!} alt="" className="background absolute w-full h-[100vh] left-0 top-0 -z-20 object-cover pointer-events-none brightness-50" />
                                 <div className="layer relative border-solid w-full h-1/2 -mt-[200px] z-40">
                                     <div className='absolute w-[260px] bottom-10 right-4 p-[20px] opacity-0 group-hover:opacity-100'> 
                                         <h2 className='text-xl font-bold'> {item.data.title} </h2>
