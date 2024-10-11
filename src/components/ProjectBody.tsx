@@ -27,9 +27,9 @@ const ProjectBody = ({page}: {page: Content.ProjectsDocument}) =>{
         <div className="flex flex-wrap lg:flex-nowrap rounded-2xl border-2 border-slate-800 bg-slate-900 px-4 py-10 md:px-8 md:py-20">
           <div className="flex  flex-col border-r-2 border-slate-50 mr-2">
             <Heading as="h1" className="text-xl md:text-7xl">{page.data.title}</Heading>
-            <div className="flex gap-4 text-chilli">
+            <div className="flex flex-wrap gap-2 md:gap-4 text-chilli overflow-x-auto">
                 {page.tags.map((tag, index) => (
-                <span key={index} className="text-xl font-bold">
+                <span key={index} className="text-sm md:text-xl font-bold whitespace-nowrap">
                     {tag}
                 </span>
                 ))}

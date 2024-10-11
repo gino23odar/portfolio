@@ -29,9 +29,9 @@ const FeaturedBody = ({page}: {page: Content.FeaturedProjectsDocument}) =>{
                 <Heading as="h1">
                     <ShuffleHeader text={page.data.title!} />
                 </Heading>
-                <div className="flex gap-4 text-chilli">
+                <div className="flex flex-wrap gap-2 md:gap-4 text-chilli overflow-x-auto">
                     {page.tags.map((tag, index) => (
-                    <span key={index} className="text-xl font-bold">
+                    <span key={index} className="text-sm md:text-xl font-bold whitespace-nowrap">
                         {tag}
                     </span>
                     ))}
