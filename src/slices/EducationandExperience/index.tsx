@@ -54,9 +54,9 @@ const EducationandExperience = ({
       </div>
       <div className="flex flex-col justify-center">
         <div className="flex justify-center w-full my-2">
-          <p>Experience prior to 2017</p>
+          <p>Experience prior to 2019</p>
         </div>
-        <div className="flex justify-center border-t-2 border-blue-900">
+        <div className="flex flex-col items-center justify-center border-t-2 border-blue-900">
           { slice.primary.oldexp.map((item) => {
             return (
               <div className="bg-blue-900 rounded-lg p-4 w-[80%] max-w-xl mt-4">
